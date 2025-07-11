@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neopets - Item Value Display
+// @name         Karla's Item Value Display
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.1
