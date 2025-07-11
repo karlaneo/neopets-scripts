@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neopets - Quest Log Simplify
+// @name         Karla's Quest Log Simplify
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.1
@@ -12,7 +12,6 @@
 // @grant        GM.xmlHttpRequest
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/quest_log_simplifier.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/quest_log_simplifier.user.js
-
 // ==/UserScript==
 
 GM_addStyle("#QuestLogStreakRewards { display: block !important; }");
