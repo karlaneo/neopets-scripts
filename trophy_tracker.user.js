@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Karla's Neopets Trophy Tracker
+// @name         Karla's Trophy Tracker
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.1
