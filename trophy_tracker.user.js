@@ -2657,24 +2657,34 @@ function createSection(title, allTrophies, ownedTrophies) {
     return section.outerHTML;
 }
 
+function openTrophySummaryPage(existingTrophies) {
+    const win = window.open("", "Title");
+    win.document.body.style.maxWidth = '1200px';
+    win.document.body.style.padding = '16px';
+    win.document.body.style.margin = 'auto';
+    win.document.body.style.textAlign = 'center';
+    win.document.body.innerHTML += createSection('Flash Game High Score Tropies', flashgameHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Cumulative High Score Tropies', cumulativeHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Other High Score Tropies', otherHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('PVP Tropies', pvpTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Non Competitive Tropies', nonCompetitiveTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Spotlights & Competitions Tropies', spotlightsAndCompetitionsTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Retired Game Tropies', retiredGameTrophies, existingTrophies);
+}
+
 (function() {
     'use strict';
 
     // Your code here...
-    const win = window.open("", "Title");
     try {
         const existingTrophies = new Set(Array.from(document.querySelectorAll('[width="600"] img')).map(n => n.src));
-        win.document.body.style.maxWidth = '1200px';
-        win.document.body.style.padding = '16px';
-        win.document.body.style.margin = 'auto';
-        win.document.body.style.textAlign = 'center';
-        win.document.body.innerHTML += createSection('Flash Game High Score Tropies', flashgameHighScoreTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('Cumulative High Score Tropies', cumulativeHighScoreTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('Other High Score Tropies', otherHighScoreTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('PVP Tropies', pvpTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('Non Competitive Tropies', nonCompetitiveTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('Spotlights & Competitions Tropies', spotlightsAndCompetitionsTrophies, existingTrophies);
-        win.document.body.innerHTML += createSection('Retired Game Tropies', retiredGameTrophies, existingTrophies);
+        const button = document.createElement('div');
+        button.innerHTML = '<div style="margin-top: 16px"><button>Show missing trophies!</button></div>';
+        document.querySelector('.content center').append(button);
+
+        button.querySelector('button').addEventListener('click', function() {
+            openTrophySummaryPage(existingTrophies);
+        });
     } catch (e) {
         console.log(e);
     }
