@@ -2,7 +2,7 @@
 // @name         Neopets - Item Value Display Raw
 // @namespace    karla@neopointskarla
 // @license GPL3
-// @version      2025-07-10
+// @version      0.0.1
 // @description  Displays the value of items from Jellyneo and Itemsdb
 // @author       Karla
 // @match        *://*.neopets.com/*
