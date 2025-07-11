@@ -11,6 +11,8 @@
 // @grant        GM_addStyle
 // @grant        GM.xmlHttpRequest
 // @downloadURL  https://cdn.jsdelivr.net/gh/karlaneo/neopets-scripts@main/quest_log_simplifier.user.js
+// @updateURL    https://cdn.jsdelivr.net/gh/karlaneo/neopets-scripts@main/quest_log_simplifier.user.js
+
 // ==/UserScript==
 
 GM_addStyle("#QuestLogStreakRewards { display: block !important; }");
