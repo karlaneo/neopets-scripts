@@ -10,6 +10,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // @grant        GM_addStyle
 // @grant        GM.xmlHttpRequest
+// @downloadURL  https://cdn.jsdelivr.net/gh/karlaneo/neopets-scripts@main/quest_log_simplifier.user.js
 // ==/UserScript==
 
 GM_addStyle("#QuestLogStreakRewards { display: block !important; }");
