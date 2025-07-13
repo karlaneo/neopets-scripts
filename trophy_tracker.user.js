@@ -2,7 +2,7 @@
 // @name         Karla's Trophy Tracker
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Displays what trophies you are missing and can upgrade
 // @author       Karla
 // @match        *://*.neopets.com/prizes.phtml*
@@ -2663,13 +2663,21 @@ function openTrophySummaryPage(existingTrophies) {
     win.document.body.style.padding = '16px';
     win.document.body.style.margin = 'auto';
     win.document.body.style.textAlign = 'center';
-    win.document.body.innerHTML += createSection('Flash Game High Score Tropies', flashgameHighScoreTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('Cumulative High Score Tropies', cumulativeHighScoreTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('Other High Score Tropies', otherHighScoreTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('PVP Tropies', pvpTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('Non Competitive Tropies', nonCompetitiveTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('Spotlights & Competitions Tropies', spotlightsAndCompetitionsTrophies, existingTrophies);
-    win.document.body.innerHTML += createSection('Retired Game Tropies', retiredGameTrophies, existingTrophies);
+
+    win.document.body.innerHTML += '<label for="black">Black</label><input id="black" name="textcolor" checked value="0" type="radio" />' +
+      '<label for="white" style="color: white">White</label><input id="white" name="textcolor" value="1" type="radio" />'
+    win.document.head.innerHTML += '<style>\n' +
+      '#black:checked ~ * { color: black }\n' +
+      '#white:checked ~ * { color: white }\n' +
+      '</style>'
+
+    win.document.body.innerHTML += createSection('Flash Game High Score Trophies', flashgameHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Cumulative High Score Trophies', cumulativeHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Other High Score Trophies', otherHighScoreTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Non Competitive Trophies', nonCompetitiveTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Spotlights & Competitions Trophies', spotlightsAndCompetitionsTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('PVP Trophies (Currently Unobtainable)', pvpTrophies, existingTrophies);
+    win.document.body.innerHTML += createSection('Retired Game Trophies', retiredGameTrophies, existingTrophies);
 }
 
 (function() {
