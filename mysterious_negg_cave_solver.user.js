@@ -2,7 +2,7 @@
 // @name         Karla's Mysterious Negg Cave Autosolver
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically solves the mysterious negg cave!
 // @author       Karla
 // @match        *://*.neopets.com/shenkuu/neggcave*
@@ -283,7 +283,7 @@ function shuffle(array) {
                     const { shape, color } = puzzleRow[j];
                     document.querySelector("#mnc_parch_ui_clear_text");
                     await sleep(random_in_range(600, 900));
-                    if (shape !== "X" && NeggCave.selectedShape !== Number(shape)) {
+                    if (shape !== "X" && NeggCave.selectedSymbol !== Number(shape)) {
                         NeggCave.clickSymbol(Number(shape));
                         await sleep(random_in_range(600, 900));
                     }
