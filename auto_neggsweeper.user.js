@@ -2,7 +2,7 @@
 // @name         Karla's Neggsweeper Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Auto plays neggsweeper, for Neopoints, trophy, and random events!
 // @author       Karla
 // @match        *://*.neopets.com/games/neggsweeper/neggsweeper.phtml*
@@ -14,6 +14,10 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_neggsweeper.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_neggsweeper.user.js
 // ==/UserScript==
+
+const random_in_range = (start, end) => {
+  return Math.floor(Math.random() * (end - start + 1) + start);
+};
 
 function shuffle(array) {
     let currentIndex = array.length;
@@ -212,12 +216,16 @@ function scanGameboard(gameboard) {
     let loseCounter = GM_getValue('lose') || 0;
     let winCounter = GM_getValue('win') || 0;
     let difficulty = GM_getValue('difficulty') || 3;
+    let delay = GM_getValue('delay') || 1000;
 
     const section = document.querySelector('[action="neggsweeper.phtml"] [style="padding:7px;"]');
     const controlPanel = document.createElement('div');
     controlPanel.innerHTML = `<div>Autoplayer</div>
     <button id="start" style="margin-top: 10px;">${autoplaying ? 'Stop' : 'Start'}</button><button id="reset">Reset</button>
+    <div>
     <select id="difficulty"><option value="1">Easy</option><option value="2">Medium</option><option value="3">Hard</option></select>
+    <label title="don't set this too low">Click Delay (ms)<input value="${delay}" type="number" /></label>
+    </div>
     <div>Win ${winCounter}</div>
     <div>Lose ${loseCounter}</div>`;
     section.prepend(controlPanel);
@@ -248,6 +256,10 @@ function scanGameboard(gameboard) {
         difficulty = Number(evt.target.value);
         GM_setValue('difficulty', difficulty);
     });
+    controlPanel.querySelector('input').addEventListener('change', function (evt) {
+        delay = Number(evt.target.value);
+        GM_setValue('delay', delay);
+    });
 
     try {
         if (document.querySelector('[name="game_level"]')) {
@@ -270,7 +282,11 @@ function scanGameboard(gameboard) {
 
             setTimeout(() => {
                 do_move(`${y}-${x}`, { ctrlKey: mine });
-            }, 1000);
+            }, random_in_range(delay, delay + 500));
+        } else if (document.querySelector('body').innerText.includes('Internal Server Error')) {
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         }
     } catch (e) {
         console.log(e);
