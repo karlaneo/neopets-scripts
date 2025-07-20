@@ -2,7 +2,7 @@
 // @name         Karla's Neggsweeper Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Auto plays neggsweeper, for Neopoints, trophy, and random events!
 // @author       Karla
 // @match        *://*.neopets.com/games/neggsweeper/neggsweeper.phtml*
@@ -212,6 +212,12 @@ function scanGameboard(gameboard) {
     'use strict';
 
     // Your code here...
+    if (document.querySelector('body').innerText.includes('Internal Server Error')) {
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+    }
+
     let autoplaying = GM_getValue('status');
     let loseCounter = GM_getValue('lose') || 0;
     let winCounter = GM_getValue('win') || 0;
@@ -283,10 +289,6 @@ function scanGameboard(gameboard) {
             setTimeout(() => {
                 do_move(`${y}-${x}`, { ctrlKey: mine });
             }, random_in_range(delay, delay + 500));
-        } else if (document.querySelector('body').innerText.includes('Internal Server Error')) {
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         }
     } catch (e) {
         console.log(e);
