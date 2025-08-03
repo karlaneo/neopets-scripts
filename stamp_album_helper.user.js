@@ -10,8 +10,8 @@
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @downloadURL  https://cdn.jsdelivr.net/gh/karlaneo/neopets-scripts@main/auto_junk_buyer.user.js
-// @updateURL    https://cdn.jsdelivr.net/gh/karlaneo/neopets-scripts@main/auto_junk_buyer.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
 // ==/UserScript==
 
 const stamps = [
