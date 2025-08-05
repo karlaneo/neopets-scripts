@@ -3,13 +3,13 @@
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.1
-// @description  Collects all void essence with one click!
+// @description  Help display missing stamps and easy search
 // @author       Karla
 // @match        *://*.neopets.com/tvw*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_xmlhttpRequest
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
 // ==/UserScript==
 
 const maps = [
@@ -180,28 +180,22 @@ const random_in_range = (start, end) => {
 
 
 async function autoCollect(mapData) {
-    let jellyneoLinks = [];
+    let jellyneoLinks;
     try {
-        statusEl.innerHTML = 'Attempting to load maps from jellyneo...';
-        jellyneoLinks = await new Promise(function(resolve, reject) {
+        jellyneoLinks = await new Promise(function(resolve) {
             GM_xmlhttpRequest({
                 method: "GET",
                 url: "https://www.jellyneo.net/?go=the_void_within&id=essence_collection#locations",
                 onload: function(response) {
                     const div = document.createElement('div');
-                    div.innerHTML = response.responseText;
+                    div.innerHTML = response.responseText.replace(/(<[^>]+?)\s+src\s*=\s*(['"])(.*?)\2/gi, '$1 data-src=$2$3$2');
                     resolve([...div.querySelectorAll('.alert-box a[href^="https://www.neopets.com"]')].map(n => n.href));
-                },
-                onerror: function(err) {
-                    reject();
-                },
+                }
             });
         });
-    } catch (e) {
-        statusEl.innerHTML = 'Load from jellyneo failed, checking all maps...';
     }
+    catch (e) {}
     if (jellyneoLinks.length > 0) {
-        statusEl.innerHTML = 'Load from jellyneo successful, only checking maps with void essence';
         mapData = mapData.filter(({ url }) => jellyneoLinks.indexOf(url) > -1);
     }
     const statusEl = document.querySelector('#k-status');
@@ -280,7 +274,6 @@ async function autoCollect(mapData) {
                     const [currentCount] = counter.innerHTML.split('/');
                     counter.innerHTML = `${+currentCount + 1}/10`;
                     if (currentCount == 9) {
-                        document.querySelector('#k-button').disabled = true;
                         statusEl.innerHTML = 'Auto collector finished successfully!';
                         return;
                     }
@@ -306,7 +299,7 @@ async function autoCollect(mapData) {
     const button = document.createElement('button');
     const counter = document.querySelector('.vc-progress-amt');
     const [currentCount] = counter.innerHTML.split('/');
-    button.id = 'k-button';
+    console.log(currentCount);
     button.className = 'button-default__2020 button-purple__2020 btn-single__2020 plothub-button';
     button.innerHTML = currentCount == 10 ? 'Collect Completed' : 'Auto Collect';
     button.disabled = currentCount == 10;
