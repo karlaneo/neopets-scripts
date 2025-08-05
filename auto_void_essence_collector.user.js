@@ -8,8 +8,8 @@
 // @match        *://*.neopets.com/tvw*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_xmlhttpRequest
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
 // ==/UserScript==
 
 const maps = [
@@ -180,9 +180,10 @@ const random_in_range = (start, end) => {
 
 
 async function autoCollect(mapData) {
-    let jellyneoLinks;
+    let jellyneoLinks = [];
     try {
-        jellyneoLinks = await new Promise(function(resolve) {
+        statusEl.innerHTML = 'Attempting to load maps from jellyneo...';
+        jellyneoLinks = await new Promise(function(resolve, reject) {
             GM_xmlhttpRequest({
                 method: "GET",
                 url: "https://www.jellyneo.net/?go=the_void_within&id=essence_collection#locations",
@@ -190,12 +191,17 @@ async function autoCollect(mapData) {
                     const div = document.createElement('div');
                     div.innerHTML = response.responseText;
                     resolve([...div.querySelectorAll('.alert-box a[href^="https://www.neopets.com"]')].map(n => n.href));
-                }
+                },
+                onerror: function(err) {
+                    reject();
+                },
             });
         });
+    } catch (e) {
+        statusEl.innerHTML = 'Load from jellyneo failed, checking all maps...';
     }
-    catch (e) {}
     if (jellyneoLinks.length > 0) {
+        statusEl.innerHTML = 'Load from jellyneo successful, only checking maps with void essence';
         mapData = mapData.filter(({ url }) => jellyneoLinks.indexOf(url) > -1);
     }
     const statusEl = document.querySelector('#k-status');
@@ -303,7 +309,7 @@ async function autoCollect(mapData) {
     button.id = 'k-button';
     button.className = 'button-default__2020 button-purple__2020 btn-single__2020 plothub-button';
     button.innerHTML = currentCount == 10 ? 'Collect Completed' : 'Auto Collect';
-    button.disabled = currentCount == 10;
+    //button.disabled = currentCount == 10;
     panel.appendChild(button);
     button.addEventListener('click', function() { autoCollect(maps) });
     const status = document.createElement('div');
