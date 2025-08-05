@@ -309,7 +309,7 @@ async function autoCollect(mapData) {
     button.id = 'k-button';
     button.className = 'button-default__2020 button-purple__2020 btn-single__2020 plothub-button';
     button.innerHTML = currentCount == 10 ? 'Collect Completed' : 'Auto Collect';
-    //button.disabled = currentCount == 10;
+    button.disabled = currentCount == 10;
     panel.appendChild(button);
     button.addEventListener('click', function() { autoCollect(maps) });
     const status = document.createElement('div');
