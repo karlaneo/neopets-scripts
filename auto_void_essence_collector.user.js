@@ -3,13 +3,13 @@
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.1
-// @description  Help display missing stamps and easy search
+// @description  Collects all void essence with one click!
 // @author       Karla
 // @match        *://*.neopets.com/tvw*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_xmlhttpRequest
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_void_essence_collector.user.js
 // ==/UserScript==
 
 const maps = [
@@ -180,25 +180,32 @@ const random_in_range = (start, end) => {
 
 
 async function autoCollect(mapData) {
-    let jellyneoLinks;
+    const statusEl = document.querySelector('#k-status');
+    let jellyneoLinks = [];
     try {
-        jellyneoLinks = await new Promise(function(resolve) {
+        statusEl.innerHTML = 'Attempting to load maps from jellyneo...';
+        jellyneoLinks = await new Promise(function(resolve, reject) {
             GM_xmlhttpRequest({
                 method: "GET",
                 url: "https://www.jellyneo.net/?go=the_void_within&id=essence_collection#locations",
                 onload: function(response) {
                     const div = document.createElement('div');
-                    div.innerHTML = response.responseText.replace(/(<[^>]+?)\s+src\s*=\s*(['"])(.*?)\2/gi, '$1 data-src=$2$3$2');
+                    div.innerHTML = response.responseText;
                     resolve([...div.querySelectorAll('.alert-box a[href^="https://www.neopets.com"]')].map(n => n.href));
-                }
+                },
+                onerror: function(err) {
+                    reject();
+                },
             });
         });
+    } catch (e) {
+        console.log(e);
+        statusEl.innerHTML = 'Load from jellyneo failed, checking all maps...';
     }
-    catch (e) {}
     if (jellyneoLinks.length > 0) {
+        statusEl.innerHTML = 'Load from jellyneo successful, only checking maps with void essence';
         mapData = mapData.filter(({ url }) => jellyneoLinks.indexOf(url) > -1);
     }
-    const statusEl = document.querySelector('#k-status');
     try {
         for (let i = 0; i < mapData.length; i += 1) {
             const { url, map } = mapData[i];
@@ -270,14 +277,15 @@ async function autoCollect(mapData) {
                         throw new Error('Error! Collect void essence failed');
                     }
                     statusEl.innerHTML = `${map} essence id ${id} collected successfully`;
-                    const counter = document.querySelector('.vc-progress-amt');
+                    const counter = vcItem.querySelector('.vc-progress-amt');
                     const [currentCount] = counter.innerHTML.split('/');
                     counter.innerHTML = `${+currentCount + 1}/10`;
                     if (currentCount == 9) {
+                        document.querySelector('#k-button').disabled = true;
                         statusEl.innerHTML = 'Auto collector finished successfully!';
                         return;
                     }
-                    document.querySelector('.vc-collected .vc-progress-bar').style.width = `calc(${+currentCount + 1} / 10 * 100%)`;
+                    vcItem.querySelector('.vc-progress-bar').style.width = `calc(${+currentCount + 1} / 10 * 100%)`;
                     await sleep(random_in_range(1000, 2000));
                 }
             }
@@ -291,16 +299,19 @@ async function autoCollect(mapData) {
     }
 }
 
+let vcItem;
 (function() {
     'use strict';
 
     // Your code here...
+    vcItem = document.querySelector('.vc-item.locked')?.previousElementSibling || Array.from(document.querySelectorAll('.vc-item')).pop();
     const panel = document.querySelector('#VoidCollectionModule');
     const button = document.createElement('button');
-    const counter = document.querySelector('.vc-progress-amt');
+    const counter = vcItem.querySelector('.vc-progress-amt');
     const [currentCount] = counter.innerHTML.split('/');
-    console.log(currentCount);
+    button.id = 'k-button';
     button.className = 'button-default__2020 button-purple__2020 btn-single__2020 plothub-button';
+    console.log(counter, currentCount);
     button.innerHTML = currentCount == 10 ? 'Collect Completed' : 'Auto Collect';
     button.disabled = currentCount == 10;
     panel.appendChild(button);
