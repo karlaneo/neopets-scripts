@@ -9,8 +9,8 @@
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/stamp_album_helper.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_volunteer.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_volunteer.user.js
 // ==/UserScript==
 
 
