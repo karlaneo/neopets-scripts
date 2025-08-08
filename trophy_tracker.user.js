@@ -9,7 +9,6 @@
 // @homepage     https://neopointskarla.com
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // @grant        GM_addStyle
-// @require      https://cdn.jsdelivr.net/gh/karlaneo/data/data.js
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/trophy_tracker.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/trophy_tracker.user.js
 // ==/UserScript==
