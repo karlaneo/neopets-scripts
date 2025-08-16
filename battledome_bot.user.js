@@ -2,7 +2,7 @@
 // @name         Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1-beta
+// @version      0.0.2
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        www.neopets.com/dome/fight*
@@ -343,7 +343,7 @@ async function insertButtons (target, stamp) {
 
     settingButton.addEventListener('click', function() {
         panel.style.display = 'block';
-        const activePet = typeof DBFight !== 'undefined' ? BDFight.selectedPet : Array.from(document.querySelectorAll('.rb-fight_petNameLabel')).find(n => n.style.display === 'grid')?.dataset?.name;
+        const activePet = typeof BDFight !== 'undefined' ? BDFight.selectedPet : Array.from(document.querySelectorAll('.rb-fight_petNameLabel')).find(n => n.style.display === 'grid')?.dataset?.name;
         document.querySelector('#pet_name_slot').innerHTML = activePet;
 
         let weaponSetting = JSON.parse(GM_getValue(`${activePet}_weapon`) || '[]');
