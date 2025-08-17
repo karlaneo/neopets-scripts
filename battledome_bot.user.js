@@ -2,7 +2,7 @@
 // @name         Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.4
+// @version      0.1.0
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        www.neopets.com/dome/fight*
@@ -476,6 +476,7 @@ function getCurrentEquippedAbility() {
                     if (weaponSetting && weaponCycleSetting) {
                         const { weapon1, weapon2, ability1 } = (n < weaponSetting.length) ? weaponSetting[n] : weaponCycleSetting;
                         const weaponsToEquip = [weapon1, weapon2].map(n => n.replace(/\s\d+$/, "")) ;
+                        let usedId = '';
 
                         for (let i = 1; i <= 2; i += 1) {
                             const equippedItemInSlot = getCurrentEquippedWeapon(i);
@@ -497,8 +498,12 @@ function getCurrentEquippedAbility() {
 
                             for (let j = 0; j < lis.length; j += 1) {
                                 const li = lis[j];
-                                if (li.style.display !== 'none' && li.querySelector(`[title="${weaponToEquip}"]`)) {
-                                    li.querySelector(`[title="${weaponToEquip}"]`).click();
+                                if (li.style.display !== 'none' && li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`)) {
+                                    if (li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`).id === usedId) {
+                                        continue;
+                                    }
+                                    li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`).click();
+                                    usedId = li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`).id
                                     break;
                                 }
                             }
