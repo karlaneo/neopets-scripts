@@ -2,7 +2,7 @@
 // @name         Karla's Item Value Display
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.1.0
 // @description  Displays the value of items from Jellyneo and Itemsdb
 // @author       Karla
 // @match        *://*.neopets.com/*
