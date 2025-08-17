@@ -2,7 +2,7 @@
 // @name         Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.1
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        www.neopets.com/dome/fight*
@@ -15,6 +15,9 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/battledome_bot.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/battledome_bot.user.js
 // ==/UserScript==
+
+const MIN_WAIT = 700;
+const MAX_WAIT = 1200;
 
 GM_addStyle("#QuestLogStreakRewards { display: block !important; }")
 
@@ -423,6 +426,26 @@ async function insertButtons (target, stamp) {
     });
 }
 
+function getCurrentEquippedWeapon(id) {
+    const weaponImages = Array.from(document.querySelectorAll('#p1usedequipment .item, #p1equipment .item')).reduce((acc, el) => ({ ...acc, [el.src]: el.title || el.alt }), {});
+    const selectedWeaponImage = document.querySelector(`#p1e${id}m.p1.selected.menu div`);
+    if (!selectedWeaponImage) {
+        return '';
+    }
+    const selectedWeapon = weaponImages[selectedWeaponImage.style.backgroundImage.replace('url("', '').replace('")', '')]
+    return selectedWeapon;
+}
+
+function getCurrentEquippedAbility() {
+    const abilityImages = Array.from(document.querySelectorAll('#p1ability td')).reduce((acc, el) => ({ ...acc, [el.querySelector('img')?.src]: el.title || el.alt }), {});
+    const selectedAbilityImage = document.querySelector('#p1am div').style.backgroundImage;
+    if (!selectedAbilityImage) {
+        return '';
+    }
+    const selectedAbility = abilityImages[selectedAbilityImage.replace('url("', '').replace('")', '')]
+    return selectedAbility;
+}
+
 (async function() {
     'use strict';
 
@@ -448,79 +471,80 @@ async function insertButtons (target, stamp) {
             async function battle(n) {
                 try {
                     while (document.querySelector('#p1e1m').style.cursor !== 'auto' && document.querySelector('#p1e1m').style.cursor !== 'pointer') {
-                        await sleep(500);
+                        await sleep(MAX_WAIT);
                     }
                     if (weaponSetting && weaponCycleSetting) {
                         const { weapon1, weapon2, ability1 } = (n < weaponSetting.length) ? weaponSetting[n] : weaponCycleSetting;
-                        if (weapon1) {
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1e1m').click();
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1e1m').click();
-                            await sleep(random_in_range(300, 500));
+                        const weaponsToEquip = [weapon1, weapon2].map(n => n.replace(/\s\d+$/, "")) ;
+
+                        for (let i = 1; i <= 2; i += 1) {
+                            const equippedItemInSlot = getCurrentEquippedWeapon(i);
+                            if (weaponsToEquip.indexOf(equippedItemInSlot) > -1) {
+                                weaponsToEquip.splice(weaponsToEquip.indexOf(equippedItemInSlot), 1);
+                                continue;
+                            }
+                            const weaponToEquip = weaponsToEquip.shift();
+                            if (!weaponToEquip) {
+                                break;
+                            }
+                            if (document.querySelector(`p1e${i}m.selected`)) {
+                                document.querySelector(`#p1e${i}m`).click();
+                                await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
+                            }
+                            document.querySelector(`#p1e${i}m`).click();
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                             const lis = document.querySelectorAll(`#p1equipment li`);
 
-                            for (let i = 0; i < lis.length; i += 1) {
-                                const li = lis[i];
-                                if (li.style.display !== 'none' && li.querySelector(`[title="${weapon1.replace(/\s\d+$/, "")}"]`)) {
-                                    li.querySelector(`[title="${weapon1.replace(/\s\d+$/, "")}"]`).click();
+                            for (let j = 0; j < lis.length; j += 1) {
+                                const li = lis[j];
+                                if (li.style.display !== 'none' && li.querySelector(`[title="${weaponToEquip}"]`)) {
+                                    li.querySelector(`[title="${weaponToEquip}"]`).click();
                                     break;
                                 }
                             }
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         }
 
-                        if (weapon2) {
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1e2m').click();
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1e2m').click();
-                            await sleep(random_in_range(300, 500));
-                            const lis2 = document.querySelectorAll(`#p1equipment li`);
-
-                            for (let i = 0; i < lis2.length; i += 1) {
-                                const li = lis2[i];
-                                if (li.style.display !== 'none' && li.querySelector(`[title="${weapon2.replace(/\s\d+$/, "")}"]`)) {
-                                    li.querySelector(`[title="${weapon2.replace(/\s\d+$/, "")}"]`).click();
-                                    break;
-                                }
-                            }
-                        }
-
+                        await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         if (ability1) {
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1am').click();
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector('#p1am').click();
-                            await sleep(random_in_range(300, 500));
-                            document.querySelector(`#p1ability [title="${ability1}"] .ability`)?.click();
+                            const currentSelectedAbility = getCurrentEquippedAbility();
+                            if (currentSelectedAbility && currentSelectedAbility !== ability1) {
+                                document.querySelector('#p1am').click();
+                                await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
+                            }
+                            if (!document.querySelector(`#p1ability [title="${ability1}"] .cooldown.act`)) {
+                                document.querySelector('#p1am').click();
+                                await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
+                                document.querySelector(`#p1ability [title="${ability1}"] .ability`)?.click();
+                            }
                         }
 
                         while (document.querySelector('#fight .inactive')) {
-                            await sleep(random_in_range(300, 500));
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         }
-                        await sleep(random_in_range(300, 500));
+                        await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         document.querySelector('#fight').click();
 
                         while (!document.querySelector('#skipreplay:not(.replay')) {
-                            await sleep(500);
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         }
                         while (!document.querySelector('.replay')) {
-                            await sleep(500);
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                             document.querySelector('#skipreplay:not(.replay').click();
                         }
 
-                        await sleep(500);
+                        await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         while (!document.querySelector('#fight') && !document.querySelector('#start') && !document.querySelector('.end_ack.collect')) {
                             console.log(1);
-                            await sleep(500);
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                         }
 
                         // #playground .end_game
                         if (document.querySelector('#p2hp').textContent === '0') {
-                            await sleep(random_in_range(300, 500));
+                            await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                             const itemLimit = document.querySelector('#bd_rewards').textContent.includes('You have reached the item limit for today');
                             const npLimit = document.querySelector('#bd_rewards').textContent.includes('You have reached the NP limit for today');
-                            const plotLimit = document.querySelector('#bd_rewards').textContent.includes('You have reached the Plot Points limit');
+                            const plotLimit = !document.querySelector('#bd_rewards').textContent.includes('Plot') || document.querySelector('#bd_rewards').textContent.includes('You have reached the Plot Points limit');
                             switch (battleType) {
                                 case 'fixed':
                                     if (battlesLeft > 1) {
@@ -563,7 +587,7 @@ async function insertButtons (target, stamp) {
             }
             async function loop() {
                 if (document.querySelector('#start')) {
-                    await sleep(random_in_range(800, 1200));
+                    await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                     document.querySelector('#start').click();
                 }
                 if (document.querySelector('#p1name')) {
@@ -579,7 +603,7 @@ async function insertButtons (target, stamp) {
                     return;
                 }
 
-                setTimeout(loop, 500);
+                setTimeout(loop, MIN_WAIT);
             }
             loop();
         }
