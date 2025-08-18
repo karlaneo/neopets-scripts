@@ -2,10 +2,10 @@
 // @name         Karla's Tea Time With Tavi Search Helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Adds easy search ssw and sw buttons to Tea Time With Tavi quest
 // @author       Karla
-// @match        www.neopets.com/games/teatime*
+// @match        *://*.neopets.com/games/teatime*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // @grant        none
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/tea_time_with_tavi_search_helper.user.js
