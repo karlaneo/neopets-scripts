@@ -2,12 +2,12 @@
 // @name         Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.0
+// @version      0.1.1
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
-// @match        www.neopets.com/dome/fight*
-// @match        www.neopets.com/dome/arena*
-// @match        www.neopets.com/dome/barracks*
+// @match        *://*.neopets.com/dome/fight*
+// @match        *://*.neopets.com/dome/arena*
+// @match        *://*.neopets.com/dome/barracks*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // @grant        GM_addStyle
 // @grant        GM_getValue
