@@ -2,10 +2,10 @@
 // @name         Karla's Auto Junk Buyer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Auto buys junk items
 // @author       Karla
-// @match        https://www.neopets.com/inventory.phtml
+// @match        *://*.neopets.com/inventory.phtml*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_addStyle
 // @grant        GM_getValue
