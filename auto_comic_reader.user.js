@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Automatically marks comic as read without hovering
 // @author       Karla
 // @match        *://*.neopets.com/tvw/story*
