@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Karla's TVW Auto Comic Reader
+// @name         Neopets - Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.2
