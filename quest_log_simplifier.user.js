@@ -2,12 +2,12 @@
 // @name         Karla's Quest Log Simplify
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Displays all quests, daily, streak, neopass daily, and neopass weekly all on a single page! Plus quick link to complete each quest!
 // @author       Karla
 // @match        *://*.neopets.com/questlog/
 // @homepage     https://neopointskarla.com
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @grant        GM.xmlHttpRequest
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/quest_log_simplifier.user.js
