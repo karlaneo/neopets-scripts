@@ -2,12 +2,12 @@
 // @name         Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Open inventory/SDB/Closet/Bank from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
 // @match        *://*.neopets.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/inventory_everywhere.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/inventory_everywhere.user.js
