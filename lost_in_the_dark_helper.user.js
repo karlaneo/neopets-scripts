@@ -2,11 +2,11 @@
 // @name         Karla's TVW Lost in the dark helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Shows the correct path for lost in the dark
 // @author       Karla
 // @match        *://*.neopets.com/games/lostinthedark/index.phtml*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/lost_in_the_dark_helper.user.js
