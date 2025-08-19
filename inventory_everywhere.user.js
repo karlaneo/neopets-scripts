@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Inventory Everywhere
+// @name         Neopets - Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.4
+// @version      0.0.5
 // @description  Open inventory/SDB/Closet/Bank from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
