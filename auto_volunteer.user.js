@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's TVW Auto Volunteer
+// @name         Neopets - Karla's TVW Auto Volunteer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Automatically sends your pets to volunteer
 // @author       Karla
 // @match        *://*.neopets.com/hospital/volunteer*
