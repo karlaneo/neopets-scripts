@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Karla's Auto Junk Buyer
+// @name         Neopets - Karla's Auto Junk Buyer
 // @namespace    karla@neopointskarla
 // @license      GPL3
 // @version      0.0.3
