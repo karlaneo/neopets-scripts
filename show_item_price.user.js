@@ -2,12 +2,12 @@
 // @name         Karla's Item Value Display
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.0
+// @version      0.1.1
 // @description  Displays the value of items from Jellyneo and Itemsdb
 // @author       Karla
 // @match        *://*.neopets.com/*
 // @homepage     https://neopointskarla.com
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @require      https://cdn.jsdelivr.net/gh/karlaneo/data/data.js
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/show_item_price.user.js
