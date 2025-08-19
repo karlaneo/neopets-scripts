@@ -2,12 +2,12 @@
 // @name         Karla's Trophy Tracker
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Displays what trophies you are missing and can upgrade
 // @author       Karla
 // @match        *://*.neopets.com/prizes.phtml*
 // @homepage     https://neopointskarla.com
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/trophy_tracker.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/trophy_tracker.user.js
