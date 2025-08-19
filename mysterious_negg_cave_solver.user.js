@@ -2,12 +2,12 @@
 // @name         Karla's Mysterious Negg Cave Autosolver
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Automatically solves the mysterious negg cave!
 // @author       Karla
 // @match        *://*.neopets.com/shenkuu/neggcave*
 // @homepage     https://neopointskarla.com
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @grant        GM_setValue
 // @grant        GM_getValue
