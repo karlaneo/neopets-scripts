@@ -2,12 +2,12 @@
 // @name         Karla's Neggsweeper Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Auto plays neggsweeper, for Neopoints, trophy, and random events!
 // @author       Karla
 // @match        *://*.neopets.com/games/neggsweeper/neggsweeper.phtml*
 // @homepage     https://neopointskarla.com
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_addStyle
 // @grant        GM_setValue
 // @grant        GM_getValue
