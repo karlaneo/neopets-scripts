@@ -2,7 +2,7 @@
 // @name         Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Open inventory/SDB/Closet/Bank from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
