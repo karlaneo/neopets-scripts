@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Tea Time With Tavi Search Helper
+// @name         Neopets - Karla's Tea Time With Tavi Search Helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.4
+// @version      0.0.5
 // @description  Adds easy search ssw and sw buttons to Tea Time With Tavi quest
 // @author       Karla
 // @match        *://*.neopets.com/games/teatime*
