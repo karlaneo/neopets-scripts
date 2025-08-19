@@ -2,15 +2,15 @@
 // @name         Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Open inventory/SDB/Closet/Bank from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
 // @match        *://*.neopets.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // @grant        GM_addStyle
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/inventory_everywhere.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/inventory_everywhere.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/neopets_everywhere.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/neopets_everywhere.user.js
 // ==/UserScript==
 
 GM_addStyle(`
@@ -329,7 +329,7 @@ async function fetchNPInventory() {
         "mode": "cors",
         "credentials": "include"
     });
-    return fetch("https://www.neopets.com/np-templates/ajax/inventory.php?itemType=np&alpha=&itemStack=1&action=", {
+    return fetch("https://www.neopets.com/np-templates/ajax/inventory.php?itemType=np&alpha=&itemStack=0&action=", {
         "headers": {
             "accept": "*/*",
             "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6,es;q=0.5",
@@ -352,7 +352,7 @@ async function fetchNPInventory() {
 }
 
 async function fetchNCInventory() {
-    return fetch("https://www.neopets.com/np-templates/ajax/inventory.php?itemType=nc&alpha=&itemStack=1&action=", {
+    return fetch("https://www.neopets.com/np-templates/ajax/inventory.php?itemType=nc&alpha=&itemStack=0&action=", {
         "headers": {
             "accept": "*/*",
             "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6,es;q=0.5",
