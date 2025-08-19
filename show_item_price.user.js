@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Item Value Display
+// @name         Neopets - Karla's Item Value Display
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.1
+// @version      0.1.2
 // @description  Displays the value of items from Jellyneo and Itemsdb
 // @author       Karla
 // @match        *://*.neopets.com/*
