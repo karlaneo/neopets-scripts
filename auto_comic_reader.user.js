@@ -2,11 +2,11 @@
 // @name         Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically marks comic as read without hovering
 // @author       Karla
 // @match        *://*.neopets.com/tvw/story*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_comic_reader.user.js
