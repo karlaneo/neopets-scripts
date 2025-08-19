@@ -2,11 +2,11 @@
 // @name         Karla's TVW Auto Volunteer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically sends your pets to volunteer
 // @author       Karla
 // @match        *://*.neopets.com/hospital/volunteer*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_volunteer.user.js
