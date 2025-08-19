@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Battledome Bot
+// @name         Neopets - Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.2
+// @version      0.1.3
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        *://*.neopets.com/dome/fight*
