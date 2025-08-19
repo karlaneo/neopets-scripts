@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Quest Log Simplify
+// @name         Neopets - Karla's Quest Log Simplify
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Displays all quests, daily, streak, neopass daily, and neopass weekly all on a single page! Plus quick link to complete each quest!
 // @author       Karla
 // @match        *://*.neopets.com/questlog/
