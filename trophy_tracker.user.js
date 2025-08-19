@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Trophy Tracker
+// @name         Neopets - Karla's Trophy Tracker
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Displays what trophies you are missing and can upgrade
 // @author       Karla
 // @match        *://*.neopets.com/prizes.phtml*
