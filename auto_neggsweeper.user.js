@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Neggsweeper Autoplayer
+// @name         Neopets - Karla's Neggsweeper Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.4
+// @version      0.0.5
 // @description  Auto plays neggsweeper, for Neopoints, trophy, and random events!
 // @author       Karla
 // @match        *://*.neopets.com/games/neggsweeper/neggsweeper.phtml*
