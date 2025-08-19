@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's TVW Auto Void Essence Collector
+// @name         Neopets - Karla's TVW Auto Void Essence Collector
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Collects all void essence with one click!
 // @author       Karla
 // @match        *://*.neopets.com/tvw*
