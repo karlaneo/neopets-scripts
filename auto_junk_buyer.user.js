@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Auto Junk Buyer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Auto buys junk items
 // @author       Karla
 // @match        *://*.neopets.com/inventory.phtml*
