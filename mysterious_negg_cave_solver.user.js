@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Mysterious Negg Cave Autosolver
+// @name         Neopets - Karla's Mysterious Negg Cave Autosolver
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Automatically solves the mysterious negg cave!
 // @author       Karla
 // @match        *://*.neopets.com/shenkuu/neggcave*
