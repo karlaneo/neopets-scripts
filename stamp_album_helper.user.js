@@ -2,7 +2,7 @@
 // @name         Karla's Stamp Album Helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Help display missing stamps and easy search
 // @author       Karla
 // @match        *://*.neopets.com/stamps.phtml*
@@ -4011,8 +4011,8 @@ const stamps = [
       album: "Qasala",
     },
     {
-      name: "No Stamp",
-      image: "https://images.neopets.com/images/no_stamp.gif",
+      name: "Horace Stamp",
+      image: "https://images.neopets.com/items/st_horace.gif",
       index: 6,
       album: "Qasala",
     },
@@ -4771,8 +4771,8 @@ const stamps = [
       album: "Mobile Apps",
     },
     {
-      name: "No Stamp",
-      image: "https://images.neopets.com/images/no_stamp.gif",
+      name: "Master of the Tower Stamp",
+      image: "https://images.neopets.com/items/cf8df6792l.gif",
       index: 6,
       album: "Mobile Apps",
     },
@@ -6732,8 +6732,8 @@ const stamps = [
       album: "Grey",
     },
     {
-      name: "No Stamp",
-      image: "https://images.neopets.com/images/no_stamp.gif",
+      name: "Sera Nero Stamp",
+      image: "https://images.neopets.com/items/st_sera_nero.gif",
       index: 3,
       album: "Grey",
     },
@@ -7024,8 +7024,8 @@ const stamps = [
       album: "Other V",
     },
     {
-      name: "No Stamp",
-      image: "https://images.neopets.com/images/no_stamp.gif",
+      name: "Doglefox Fetch Stamp",
+      image: "https://images.neopets.com/items/f2a74kb582.gif",
       index: 1,
       album: "Other V",
     },
