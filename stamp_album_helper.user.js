@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's Stamp Album Helper
+// @name         Neopets - Karla's Stamp Album Helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Help display missing stamps and easy search
 // @author       Karla
 // @match        *://*.neopets.com/stamps.phtml*
