@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Karla's TVW Lost in the dark helper
+// @name         Neopets - Karla's TVW Lost in the dark helper
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Shows the correct path for lost in the dark
 // @author       Karla
 // @match        *://*.neopets.com/games/lostinthedark/index.phtml*
