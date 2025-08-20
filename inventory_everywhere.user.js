@@ -2,8 +2,8 @@
 // @name         Neopets - Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.5
-// @description  Open inventory/SDB/Closet/Bank from every page! No need to navigate back and forth
+// @version      0.0.6
+// @description  Open inventory from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
 // @match        *://*.neopets.com/*
@@ -312,6 +312,19 @@ To calculate grid max-width, add (30px * maximum number of columns) to breakpoin
 		inset 0 2px 0 1px rgba(253,249,220,1), /* Top Shine */
 		0 0 0 2px rgba(0,0,0,1); /* black outside border */
 }
+#inventory .img-wrapper {
+    display: block !important;
+}
+#inventory .img-wrapper div {
+    text-align: center !important;
+}
+#inventory [name="giveform"] .button-yellow__2020 {
+    width: 200px;
+    margin: 10px auto;
+}
+#inventory button {
+    display: none !important;
+}
 `);
 
 async function fetchNPInventory() {
@@ -412,11 +425,13 @@ async function buildNPInventoryPopup(npSection, actionPanel) {
             });
         });
     }
+    /*
     const itemEls2 = Array.from(ncSection.querySelectorAll('.item-img'));
     for (let i = 0; i < itemEls2.length; i += 1) {
         itemEls[i].classList.remove('lazy');
         itemEls2[i].style.backgroundImage = `url(${itemEls2[i].dataset.image})`;
     }
+    */
 }
 
 async function loadItemOptions(objId) {
@@ -461,11 +476,98 @@ async function useItemOption(objId, action) {
         return doc.body.innerHTML;
     });
 }
-// document.querySelectorAll('#invResult a.inv-refresh')
 
-// sdb https://images.neopets.com/themes/h5/basic/images/v3/safetydeposit-icon.svg
-// quick stock https://images.neopets.com/themes/h5/basic/images/v3/quickstock-icon.svg
-// bank https://images.neopets.com/premium/portal/images/banktotal-icon.png
+function auctionItem() {
+    var obj_id_value = $("#invResult").find('input[name="obj_id"]').val();
+    var startprice = $("#invResult").find('input[name="start_price"]').val();
+    var minincrement = $("#invResult").find('input[name="min_increment"]').val();
+    var duration = $("#invResult")
+    .find('select[name="duration"]')
+    .find("option:selected")
+    .val();
+    var neofriendsonly = "";
+    if (
+        $("#invResult").find('input[name="neofriends_only"]').is(":checked") == true
+    ) {
+        neofriendsonly = "on";
+    } else {
+        neofriendsonly = "off";
+    }
+
+    var auctionData = {
+        obj_id: obj_id_value,
+        start_price: startprice,
+        min_increment: minincrement,
+        duration: duration,
+        neofriends_only: neofriendsonly,
+    };
+
+    // Using items takes time, please hold
+    showResultLoading();
+
+    $.ajax({
+        type: "POST",
+        url: "/add_auction.phtml",
+        data: auctionData,
+        dataType: "html",
+        success: function (response) {
+            // Display Results
+            $("#invResult").find(".popup-body__2020").html(response);
+            $("#invResult").find("h3").html("Success!");
+            $("#invResult").find(".popup-footer__2020").show();
+            toggleInvRefresh();
+            centerPopup__2020();
+        },
+        error: function () {
+            console.log("Error");
+            $("#invResult").find("h3").html("Uh oh!");
+            centerPopup__2020();
+        },
+        complete: function () {
+            $("#invResult").find(".popup-footer__2020").show();
+        }
+    });
+}
+
+function giveNeofriend() {
+    // Give to Neofriend
+    var obj_id_value = $("#invResult").find('input[name="obj_id"]').val();
+    var or_name = $("#invResult").find('input[name="or_name"]').val();
+    var action = $("#invResult")
+    .find('select[name="action"]')
+    .find("option:selected")
+    .val();
+
+    var giveData = {
+        obj_id: obj_id_value,
+        or_name: or_name,
+        action: action,
+    };
+
+    // Using items takes time, please hold
+    showResultLoading();
+
+    $.ajax({
+        type: "POST",
+        url: "/np-templates/views/useobject.phtml",
+        data: giveData,
+        dataType: "html",
+        success: function (response) {
+            // Display Results
+            $("#invResult").find(".popup-body__2020").html(response);
+            $("#invResult").find("h3").html("Give to Neofriend");
+            centerPopup__2020();
+        },
+        error: function () {
+            console.log("Error");
+            $("#invResult").find("h3").html("Uh oh!");
+            centerPopup__2020();
+        },
+        complete: function () {
+            $("#invResult").find(".popup-footer__2020").show();
+        }
+    });
+}
 
 (async function() {
     'use strict';
@@ -513,7 +615,7 @@ async function useItemOption(objId, action) {
         inventoryPanel.style.background = 'rgba(242, 133, 0, 0.5)';
         inventoryPanel.style.display = 'flex';
         inventoryPanel.style.flexDirection = 'column';
-        inventoryPanel.style.gap = '16px';
+        // inventoryPanel.style.gap = '16px';
         inventoryPanel.style.display = 'none';
         const actionPanel = document.createElement('div');
         const items = document.createElement('div');
@@ -524,15 +626,19 @@ async function useItemOption(objId, action) {
         ncSection.style.margin = '16px 0';
         actionPanel.style.margin = '16px 0';
         npSection.style.backgroundColor = 'white';
+        npSection.style.flexGrow = '1';
+        npSection.style.height = '0';
+        npSection.style.overflow = 'auto';
         ncSection.style.backgroundColor = 'white';
         actionPanel.style.backgroundColor = 'white';
         npSection.style.borderRadius = '6px';
         ncSection.style.borderRadius = '6px';
         actionPanel.style.borderRadius = '6px';
-        items.appendChild(actionPanel);
-        items.appendChild(npSection);
+        //items.appendChild(actionPanel);
+        //items.appendChild(npSection);
         // items.appendChild(ncSection);
-        inventoryPanel.appendChild(items);
+        inventoryPanel.appendChild(actionPanel);
+        inventoryPanel.appendChild(npSection);
         const closeButton = document.createElement('button');
         closeButton.innerHTML = 'Close';
         closeButton.className = 'button-default__2020 button-yellow__2020';
