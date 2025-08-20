@@ -10,8 +10,8 @@
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/dice_a_roo_autoplayer.user.js
-// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/dice_a_roo_autoplayer.user.js
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_dice_a_roo.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_dice_a_roo.user.js
 // ==/UserScript==
 
 let jackpotStop = GM_getValue('jackpot_stop') || false;
