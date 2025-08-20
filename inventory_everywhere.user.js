@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.7
+// @version      0.1.0
 // @description  Open inventory from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
@@ -325,6 +325,13 @@ To calculate grid max-width, add (30px * maximum number of columns) to breakpoin
 #inventory button.button-yellow__2020 {
     display: none !important;
 }
+#action_panel img {
+    width: 80px;
+    height: 80px;
+}
+#action_panel .errorBack {
+    display: none;
+}
 `);
 
 async function fetchNPInventory() {
@@ -408,6 +415,12 @@ async function buildNPInventoryPopup(npSection, actionPanel) {
                     event.target.disabled = true;
                     actionPanel.querySelector('.invitem-submit').innerHTML = 'loading...';
                     actionPanel.innerHTML = await useItemOption(objId, actionPanel.querySelector('select').value);
+                    if (actionPanel.querySelector('[onclick="auctionItem()"]')) {
+                        actionPanel.querySelector('[onclick="auctionItem()"]').addEventListener('click', auctionItem);
+                    }
+                    if (actionPanel.querySelector('[onclick="giveNeofriend()"]')) {
+                        actionPanel.querySelector('[onclick="giveNeofriend()"]').addEventListener('click', giveNeofriend);
+                    }
                     if (!actionPanel.querySelector('.invitem-submit')) {
                         const refreshButton = document.createElement('button');
                         refreshButton.className = 'button-default__2020 button-yellow__2020';
@@ -478,94 +491,72 @@ async function useItemOption(objId, action) {
 }
 
 function auctionItem() {
-    var obj_id_value = $("#invResult").find('input[name="obj_id"]').val();
-    var startprice = $("#invResult").find('input[name="start_price"]').val();
-    var minincrement = $("#invResult").find('input[name="min_increment"]').val();
-    var duration = $("#invResult")
-    .find('select[name="duration"]')
-    .find("option:selected")
-    .val();
+    var obj_id_value = document.querySelector('#inventory input[name="obj_id"]').value;
+    var startprice = document.querySelector('#inventory input[name="start_price"]').value;
+    var minincrement = document.querySelector('#inventory input[name="min_increment"]').value;
+    var duration = document.querySelector('#inventory select[name="duration"]').value;
     var neofriendsonly = "";
     if (
-        $("#invResult").find('input[name="neofriends_only"]').is(":checked") == true
+        document.querySelector('#inventory input[name="neofriends_only"]').checked
     ) {
         neofriendsonly = "on";
     } else {
         neofriendsonly = "off";
     }
 
-    var auctionData = {
-        obj_id: obj_id_value,
-        start_price: startprice,
-        min_increment: minincrement,
-        duration: duration,
-        neofriends_only: neofriendsonly,
-    };
+    document.querySelector('[onclick="auctionItem()"]').disabled = true;
 
-    // Using items takes time, please hold
-    showResultLoading();
-
-    $.ajax({
-        type: "POST",
-        url: "/add_auction.phtml",
-        data: auctionData,
-        dataType: "html",
-        success: function (response) {
-            // Display Results
-            $("#invResult").find(".popup-body__2020").html(response);
-            $("#invResult").find("h3").html("Success!");
-            $("#invResult").find(".popup-footer__2020").show();
-            toggleInvRefresh();
-            centerPopup__2020();
+    fetch("https://www.neopets.com/add_auction.phtml", {
+        "headers": {
+            "accept": "text/html, */*; q=0.01",
+            "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "x-requested-with": "XMLHttpRequest"
         },
-        error: function () {
-            console.log("Error");
-            $("#invResult").find("h3").html("Uh oh!");
-            centerPopup__2020();
-        },
-        complete: function () {
-            $("#invResult").find(".popup-footer__2020").show();
-        }
-    });
+        "referrer": "https://www.neopets.com/inventory.phtml",
+        "body": `obj_id=${obj_id_value}&start_price=${startprice}&min_increment=${minincrement}&duration=${duration}&neofriends_only=${neofriendsonly}`,
+        "method": "POST",
+        "mode": "cors",
+    }).then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.text(); // since dataType was "html"
+    }).then(response => {
+        // Display Results
+        document.querySelector('#action_panel').innerHTML = response;
+    }).catch(error => {
+        console.log("Error", error);
+        document.querySelector('#action_panel').innerHTML = "Uh oh!";
+    })
 }
 
 function giveNeofriend() {
     // Give to Neofriend
-    var obj_id_value = $("#invResult").find('input[name="obj_id"]').val();
-    var or_name = $("#invResult").find('input[name="or_name"]').val();
-    var action = $("#invResult")
-    .find('select[name="action"]')
-    .find("option:selected")
-    .val();
+    var obj_id_value = document.querySelector('#inventory input[name="obj_id"]').value;
+    var or_name = document.querySelector('#inventory input[name="or_name"]').value;
 
-    var giveData = {
-        obj_id: obj_id_value,
-        or_name: or_name,
-        action: action,
-    };
+    document.querySelector('[onclick="giveNeofriend()"]').disabled = true;
 
-    // Using items takes time, please hold
-    showResultLoading();
-
-    $.ajax({
-        type: "POST",
-        url: "/np-templates/views/useobject.phtml",
-        data: giveData,
-        dataType: "html",
-        success: function (response) {
-            // Display Results
-            $("#invResult").find(".popup-body__2020").html(response);
-            $("#invResult").find("h3").html("Give to Neofriend");
-            centerPopup__2020();
+    fetch("https://www.neopets.com/np-templates/views/useobject.phtml", {
+        "headers": {
+            "accept": "text/html, */*; q=0.01",
+            "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6,es;q=0.5",
+            "cache-control": "no-cache",
+            "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "x-requested-with": "XMLHttpRequest"
         },
-        error: function () {
-            console.log("Error");
-            $("#invResult").find("h3").html("Uh oh!");
-            centerPopup__2020();
-        },
-        complete: function () {
-            $("#invResult").find(".popup-footer__2020").show();
-        }
+        "referrer": "https://www.neopets.com/inventory.phtml",
+        "body": `obj_id=${obj_id_value}&or_name=${or_name}`,
+        "method": "POST",
+        "mode": "cors",
+        "credentials": "include"
+    }).then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.text(); // since dataType was "html"
+    }).then(response => {
+        // Display Results
+        document.querySelector('#action_panel').innerHTML = response;
+    }).catch(error => {
+        console.log("Error", error);
+        document.querySelector('#action_panel').innerHTML = "Uh oh!";
     });
 }
 
@@ -618,6 +609,7 @@ function giveNeofriend() {
         // inventoryPanel.style.gap = '16px';
         inventoryPanel.style.display = 'none';
         const actionPanel = document.createElement('div');
+        actionPanel.id = 'action_panel';
         const items = document.createElement('div');
         items.style.flexGrow = '1';
         const npSection = document.createElement('div');
