@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Dice-A-Roo Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically plays dice-a-roo
 // @author       Karla
 // @match        *://*.neopets.com/games/dicearoo.phtml*
@@ -43,6 +43,9 @@ function mainLoop() {
     'use strict';
 
     // Your code here...
+    if (document.body.innerHTML.includes("Im SO BORED of Dice-A-Roo... let's play something else!")) {
+        return;
+    }
     if (document.querySelector('h1')?.innerHTML?.includes('Internal Server Error')) {
         setTimeout(function() { window.location.reload() }, 1000);
     }
@@ -80,5 +83,6 @@ function mainLoop() {
 
     if (autoplay) {
         timeout = setTimeout(mainLoop, random_in_range(500, 1000));
+        setTimeout(function() { window.location.reload() }, 5000);
     }
 })();
