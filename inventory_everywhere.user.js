@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Inventory Everywhere
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.6
+// @version      0.0.7
 // @description  Open inventory from every page! No need to navigate back and forth
 // @author       Karla
 // @homepage     https://neopointskarla.com
@@ -322,7 +322,7 @@ To calculate grid max-width, add (30px * maximum number of columns) to breakpoin
     width: 200px;
     margin: 10px auto;
 }
-#inventory button {
+#inventory button.button-yellow__2020 {
     display: none !important;
 }
 `);
@@ -639,7 +639,7 @@ function giveNeofriend() {
         // items.appendChild(ncSection);
         inventoryPanel.appendChild(actionPanel);
         inventoryPanel.appendChild(npSection);
-        const closeButton = document.createElement('button');
+        const closeButton = document.createElement('div');
         closeButton.innerHTML = 'Close';
         closeButton.className = 'button-default__2020 button-yellow__2020';
         closeButton.style.width = '100px';
