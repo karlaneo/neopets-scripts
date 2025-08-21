@@ -2,16 +2,16 @@
 // @name         Neopets - Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.4
+// @version      0.0.5
 // @description  Automatically marks comic as read without hovering
 // @author       Karla
 // @match        *://*.neopets.com/tvw/story*
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @downloadURL https://update.greasyfork.org/scripts/544976/Neopets%20-%20Karla%27s%20TVW%20Auto%20Comic%20Reader.user.js
-// @updateURL https://update.greasyfork.org/scripts/544976/Neopets%20-%20Karla%27s%20TVW%20Auto%20Comic%20Reader.meta.js
-// ==/UserScript==
+// @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_comic_reader.user.js
+// @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_comic_reader.user.js
+    // ==/UserScript==
 
 
 const sleep = (time) =>
