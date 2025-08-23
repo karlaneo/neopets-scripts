@@ -8,7 +8,6 @@
 // @match        *://*.neopets.com/shenkuu/lunar/?show=puzzle*
 // @homepage     https://neopointskarla.com
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
-// @require      https://cdn.jsdelivr.net/gh/karlaneo/data/data.js
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/lunar_temple_highlighter.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/lunar_temple_highlighter.user.js
 // ==/UserScript==
