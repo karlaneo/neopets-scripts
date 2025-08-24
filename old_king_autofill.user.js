@@ -9,7 +9,6 @@
 // @match        *://*.neopets.com/medieval/wiseking.phtml*
 // @homepage     https://neopointskarla.com
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
-// @require      https://cdn.jsdelivr.net/gh/karlaneo/data/data.js
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/old_king_autofill.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/old_king_autofill.user.js
 // ==/UserScript==
