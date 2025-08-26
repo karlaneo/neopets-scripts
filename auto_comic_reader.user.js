@@ -11,7 +11,7 @@
 // @grant        GM_setValue
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_comic_reader.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_comic_reader.user.js
-    // ==/UserScript==
+// ==/UserScript==
 
 
 const sleep = (time) =>
@@ -60,6 +60,9 @@ const random_in_range = (start, end) => {
                 await sleep(500);
                 await document.querySelector('#PlotPuzzleButton').click();
 
+            } else {
+                console.log("Unknown puzzle");
+                return;
             }
         }
 
