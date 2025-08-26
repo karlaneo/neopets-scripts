@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.5
+// @version      0.0.6
 // @description  Automatically marks comic as read without hovering
 // @author       Karla
 // @match        *://*.neopets.com/tvw/story*
@@ -52,6 +52,14 @@ const random_in_range = (start, end) => {
                 document.querySelector("#PlotPuzzleAnswer4").value = "O";
                 await sleep(500);
                 await document.querySelector('#PlotPuzzleButton').click();
+            } else if (document.querySelector('#PlotPuzzleForm.puzzle-3')) {
+                document.querySelector('#PuzzleSelect1').value = '6';
+                document.querySelector('#PuzzleSelect2').value = '33';
+                document.querySelector('#PuzzleSelect3').value = '37';
+                document.querySelector('#PuzzleSelect4').value = '29';
+                await sleep(500);
+                await document.querySelector('#PlotPuzzleButton').click();
+
             }
         }
 
