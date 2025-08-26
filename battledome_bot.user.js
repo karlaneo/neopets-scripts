@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.3
+// @version      0.1.4
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        *://*.neopets.com/dome/fight*
@@ -481,6 +481,7 @@ function getCurrentEquippedAbility() {
                         for (let i = 1; i <= 2; i += 1) {
                             const equippedItemInSlot = getCurrentEquippedWeapon(i);
                             if (weaponsToEquip.indexOf(equippedItemInSlot) > -1) {
+                                console.log(equippedItemInSlot, "equipped");
                                 weaponsToEquip.splice(weaponsToEquip.indexOf(equippedItemInSlot), 1);
                                 continue;
                             }
@@ -498,7 +499,7 @@ function getCurrentEquippedAbility() {
 
                             for (let j = 0; j < lis.length; j += 1) {
                                 const li = lis[j];
-                                if (li.style.display !== 'none' && li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`)) {
+                                if (li.style.display !== 'none' && li.querySelector(`[title="${weaponToEquip}"]:not(.hide), [alt="${weaponToEquip}"]:not(.hide)`)) {
                                     if (li.querySelector(`[title="${weaponToEquip}"], [alt="${weaponToEquip}"]`).id === usedId) {
                                         continue;
                                     }
