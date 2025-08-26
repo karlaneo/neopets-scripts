@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's TVW Auto Comic Reader
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.6
+// @version      0.0.7
 // @description  Automatically marks comic as read without hovering
 // @author       Karla
 // @match        *://*.neopets.com/tvw/story*
@@ -38,28 +38,32 @@ const random_in_range = (start, end) => {
         }
 
         if (document.querySelector('.plothub-puzzle')) {
+            return;
             while (document.querySelector('.plothub-puzzle.hide')) {
                 await sleep(500);
             }
-            if (document.querySelector('.plothub-puzzle:not(.hide) #PlotPuzzleAnswer')) {
+            if (document.querySelector('#PlotPuzzle [name="puzzleID"]').value === '25') {
                 document.querySelector('#PlotPuzzleAnswer').value = 'OUR GOURMANDIZER UNIFIES ALL';
                 await sleep(500);
                 await document.querySelector('#PlotPuzzleButton').click();
-            } else if (document.querySelector(".plothub-puzzle:not(.hide) #PlotPuzzleAnswer1")) {
+            } else if (document.querySelector('#PlotPuzzle [name="puzzleID"]').value === '26') {
                 document.querySelector("#PlotPuzzleAnswer1").value = "V";
                 document.querySelector("#PlotPuzzleAnswer2").value = "I";
                 document.querySelector("#PlotPuzzleAnswer3").value = "G";
                 document.querySelector("#PlotPuzzleAnswer4").value = "O";
                 await sleep(500);
                 await document.querySelector('#PlotPuzzleButton').click();
-            } else if (document.querySelector('#PlotPuzzleForm.puzzle-3')) {
+            } else if (document.querySelector('#PlotPuzzle [name="puzzleID"]').value === '27') {
                 document.querySelector('#PuzzleSelect1').value = '6';
                 document.querySelector('#PuzzleSelect2').value = '33';
                 document.querySelector('#PuzzleSelect3').value = '37';
                 document.querySelector('#PuzzleSelect4').value = '29';
                 await sleep(500);
                 await document.querySelector('#PlotPuzzleButton').click();
-
+            } else if (document.querySelector('#PlotPuzzle [name="puzzleID"]').value === '28') {
+                document.querySelector('#PlotPuzzleAnswer').value = 'WHEEL';
+                await sleep(500);
+                await document.querySelector('#PlotPuzzleButton').click();
             } else {
                 console.log("Unknown puzzle");
                 return;
