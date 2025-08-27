@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.4
+// @version      0.2.0
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        *://*.neopets.com/dome/fight*
@@ -30,6 +30,7 @@ let rewardsPlot = GM_getValue('rewards_plot') || false;
 let infiniteCount = GM_getValue('infinite_count') || 1;
 let infiniteWait = GM_getValue('infinite_wait') || 1;
 let battlesDone = GM_getValue('battles_done') || 0;
+let paused = GM_getValue('paused') || false;
 
 const random_in_range = (start, end) => {
     return Math.floor(Math.random() * (end - start + 1) + start);
@@ -213,12 +214,10 @@ async function insertButtons (target, stamp) {
         </div>
         <div id="infinite_panel" style="display: none;">
           <div id="fixed_panel" style="text-align: left; padding-left: 16px;">
-            <label style="margin-right: 5px" for="infinite_count" class="settings-label">After X Battles:</label>
-            <input id="infinite_count" type="number" min="1">
+            <label style="margin-right: 5px" for="infinite_count" class="settings-label">After <input id="infinite_count" type="number" min="1"> battles</label>
           </div>
           <div id="fixed_panel" style="text-align: left; padding-left: 16px;">
-            <label style="margin-right: 5px" for="infinite_count" class="settings-label">Wait for X (+/-20)s:</label>
-            <input id="infinite_wait" type="number" min="1">
+            <label style="margin-right: 5px" for="infinite_count" class="settings-label">Wait for <input id="infinite_wait" type="number" min="1"> (+1~20)s</label>
           </div>
         </div>
         <div style="margin-top: 16px;">
@@ -306,6 +305,8 @@ async function insertButtons (target, stamp) {
     fixedCountInput.addEventListener('change', function(event) {
         GM_setValue('fixed_count', Number(event.target.value));
         fixedCount = Number(event.target.value);
+        battlesLeft = fixedCount;
+        GM_setvalue('battles_left', battlesLeft);
     });
     rewardsNpInput.addEventListener('change', function(event) {
         GM_setValue('rewards_np', event.target.checked);
@@ -454,15 +455,26 @@ function getCurrentEquippedAbility() {
         if (document.querySelector('.npcContainer, #rbfightStep2')) {
             await insertButtons();
         } else {
+            document.querySelector('#bdNav').style.marginBottom = '30px';
             const div = document.createElement('div');
             div.id = 'battle_status';
             document.querySelector('#arenacontainer').appendChild(div);
             div.style.position = 'absolute';
             div.style.bottom = '100%';
+            div.style.left = '50%';
+            div.style.transform = 'translateX(-50%)';
             if (battleType === 'fixed') {
-                div.innerHTML = `${battlesLeft} / ${fixedCount} battles`;
+                div.innerHTML = `${battlesLeft} battles left`;
             } else if (battleType === 'infinite') {
-                div.innerHTML = `${battlesDone} battles done`;
+                div.innerHTML = `${battlesDone} battles done&nbsp;<button>${paused ? 'resume' : 'pause'}</button>`;
+                div.querySelector('button').addEventListener('click', function() {
+                    paused = !paused;
+                    GM_setValue('paused', paused);
+                    div.querySelector('button').innerHTML = paused ? 'resume' : 'pause';
+                });
+            }
+            while (paused) {
+                await sleep(1000);
             }
             let pet = '';
             let weaponSetting;
