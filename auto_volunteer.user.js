@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's TVW Auto Volunteer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.1.0
+// @version      1.0.0
 // @description  Automatically sends your pets to volunteer
 // @author       Karla
 // @match        *://*.neopets.com/hospital/volunteer*
@@ -26,13 +26,27 @@ function parseTimeToMs(timeStr) {
 }
 
 function parseMsToTime(ms) {
-  const totalSeconds = Math.floor(ms / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
 
-  return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}:${seconds}`;
 }
+
+async function getPets(fightId) {
+    const formData = new FormData();
+    formData.append("_ref_ck", getCK());
+    formData.append("fight_id", fightId);
+
+    return fetch("/np-templates/ajax/plots/hospital/get-pets.php", {
+        method: "POST",
+        headers: {"x-requested-with": "XMLHttpRequest"},
+        body: formData,
+    }).then((res) => res.json());
+}
+
+
 
 async function loop(battlePet) {
     while (document.querySelector('[onclick="completeShift(this)"]')) {
@@ -49,43 +63,37 @@ async function loop(battlePet) {
 
     console.log("Choosing fight");
     await sleep(random_in_range(1000, 1500));
-    const volunteerButtons = document.querySelectorAll('[onclick^="selectFight"]');
-    if (volunteerButtons.length > 0) {
-        const volunteerButton = volunteerButtons[volunteerButtons.length - 1];
+    const volunteerButtons = Array.from(document.querySelectorAll('[onclick^="selectFight"]'));
+    while (volunteerButtons.length > 0) {
+        const volunteerButton = volunteerButtons.pop();
         const fightId = volunteerButton.getAttribute('onclick').replace('selectFight(', '').replace(')', '');
         console.log("fight", fightId);
-        selectFight(fightId);
-        while (document.querySelector('#VolunteerJoinPopup').style.display !== 'block') {
-            await sleep(100);
-        }
-        await sleep(random_in_range(1000, 1500));
-        showPets();
-        while (document.querySelector('#VolunteerPetLoading') !== null) {
-            console.log(document.querySelector('#VolunteerPetLoading'));
-            await sleep(500);
-        }
-        await sleep(random_in_range(1000, 1500));
-        const availablePets = document.querySelectorAll(`#VolunteerPetList [onclick="selectPet(this)"]:not([data-petname="${battlePet}"]`);
-        if (availablePets.length === 0) {
+        const { pets } = await getPets(fightId);
+        const pet = pets.find((p) => !p.disabled && p.name !== battlePet);
+        if (!pet) {
             console.log("No available pets");
-            showFights();
+            break;
         } else {
-            const startButton = document.querySelector('#VolunteerJoinButton');
-            console.log("Sending pet", availablePets[0].dataset.petname);
-            startButton.setAttribute("data-pet", availablePets[0].dataset.petname);
-            startButton.removeAttribute("disabled");
-            startShift(document.querySelector('#VolunteerJoinButton'));
-            await sleep(500);
-            if (document.querySelector('#VolunteerJoinedPopup').style.display === 'block') {
-                document.querySelector('#VolunteerJoinedPopup .popup-exit').click();
-            }
-            // page should automatically reload when sending pet to volunteer after 3 seconds
-            console.log("Waiting for page reload");
+            console.log(pet.name)
+            const joinVolunteerButton = document.createElement('div');
+            joinVolunteerButton.innerHTML = `<button tabindex="0" id="VolunteerJoinButton" class="button-default__2020 button-yellow__2020 btn-single__2020 plot-button" data-fight="${fightId}" data-pet="${pet.name}" onclick="startShift(this)">Join Volunteer Team</button>`;
+            joinVolunteerButton.style.display = 'none';
+            document.querySelector('body').append(joinVolunteerButton);
+            joinVolunteerButton.querySelector('button').click();
+        }
+
+        await sleep(random_in_range(1000, 1500));
+        if (!document.querySelector('.vc-fight .vc-tooltip-icon.premium-icon')) {
+            // no premium, page will reload
             return;
         }
-    } else {
-        console.log("All fights used");
+        if (document.querySelector('#VolunteerJoinedPopup').style.display === 'block') {
+            document.querySelector('#VolunteerJoinedPopup .popup-exit').click();
+            await sleep(random_in_range(1000, 1500));
+        }
     }
+
+    console.log("All fights used");
 
     const statusEls = document.querySelectorAll('.vc-fight-timer');
     let maxTime = 0;
@@ -112,6 +120,7 @@ async function loop(battlePet) {
     let battlePet = GM_getValue("battle_pet") || '';
     try {
         if (document.querySelector('#VolunteerFightInfo')) {
+            document.querySelector('#VolunteerJoinButton').id = '#VolunteerJoinButtonOld';
             while (document.querySelector('.vc-act.minimize .vc-pane-btn')) {
                 document.querySelector('.vc-act.minimize .vc-pane-btn').click();
                 await sleep(random_in_range(100, 150));
