@@ -47,7 +47,7 @@ function loop() {
     try {
         const anchor = Array.from(document.querySelectorAll('p b')).find((n) => n.textContent = 'Select your Mortog : ')?.parentNode
         || document.querySelector('center')
-        || Array.from(document.querySelectorAll('b')).find((n) => n.textContent = 'Uh oh...')
+        || Array.from(document.querySelectorAll('b')).find((n) => n.textContent === 'Uh oh...')
         ;
 
         const section = document.createElement('div');
