@@ -5,7 +5,7 @@
 // @version      0.0.1
 // @description  Automatically plays kiss the mortog
 // @author       Karla
-// @match        *://*.neopets.com/medieval/kissthemortog.phtml*
+// @match        *://*.neopets.com/medieval/doubleornothing.phtml*
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -13,9 +13,9 @@
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_kiss_the_mortog.user.js
 // ==/UserScript==
 
-let playing = GM_getValue('playing') || false;
-let target = GM_getValue('target') || '100';
-console.log(target);
+let playing = GM_getValue('playing_ktm') || false;
+let target = GM_getValue('target_ktm') || '100';
+console.log(playing);
 let timeout;
 
 const random_in_range = (start, end) => {
@@ -55,7 +55,7 @@ function loop() {
         section.style.textAlign = 'center';
         section.style.margin = '10px';
         section.innerHTML = `
-        <div style="margin-bottom: 10px">-- Kiss The Mortog Autoplayer --</div>
+        <div style="margin-bottom: 10px">-- Double or Nothing Autoplayer --</div>
         <label>Stop at score <select>
           <option value="100">100</option>
           <option value="300">300</option>
@@ -79,12 +79,12 @@ function loop() {
             } else {
                 loop();
             }
-            GM_setValue('playing', playing);
+            GM_setValue('playing_ktm', playing);
         });
         section.querySelector('select').value = target;
         section.querySelector('select').addEventListener('change', function(event) {
             target = event.target.value;
-            GM_setValue('target', target);
+            GM_setValue('target_ktm', target);
         });
         section.querySelector('select').disabled = playing;
         if (playing) {
