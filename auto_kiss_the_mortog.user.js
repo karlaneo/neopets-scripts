@@ -5,7 +5,7 @@
 // @version      0.0.1
 // @description  Automatically plays kiss the mortog
 // @author       Karla
-// @match        *://*.neopets.com/medieval/doubleornothing.phtml*
+// @match        *://*.neopets.com/medieval/kissthemortog.phtml*
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -15,7 +15,6 @@
 
 let playing = GM_getValue('playing_ktm') || false;
 let target = GM_getValue('target_ktm') || '100';
-console.log(playing);
 let timeout;
 
 const random_in_range = (start, end) => {
@@ -55,7 +54,7 @@ function loop() {
         section.style.textAlign = 'center';
         section.style.margin = '10px';
         section.innerHTML = `
-        <div style="margin-bottom: 10px">-- Double or Nothing Autoplayer --</div>
+        <div style="margin-bottom: 10px">-- Kiss the Mortog Autoplayer --</div>
         <label>Stop at score <select>
           <option value="100">100</option>
           <option value="300">300</option>
