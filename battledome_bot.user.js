@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.2.0
+// @version      0.3.0
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        *://*.neopets.com/dome/fight*
@@ -464,15 +464,15 @@ function getCurrentEquippedAbility() {
             div.style.left = '50%';
             div.style.transform = 'translateX(-50%)';
             if (battleType === 'fixed') {
-                div.innerHTML = `${battlesLeft} battles left`;
+                div.innerHTML = `${battlesLeft} battles left&nbsp;<button>${paused ? 'resume' : 'pause'}</button>`;
             } else if (battleType === 'infinite') {
                 div.innerHTML = `${battlesDone} battles done&nbsp;<button>${paused ? 'resume' : 'pause'}</button>`;
-                div.querySelector('button').addEventListener('click', function() {
-                    paused = !paused;
-                    GM_setValue('paused', paused);
-                    div.querySelector('button').innerHTML = paused ? 'resume' : 'pause';
-                });
             }
+            div.querySelector('button').addEventListener('click', function() {
+                paused = !paused;
+                GM_setValue('paused', paused);
+                div.querySelector('button').innerHTML = paused ? 'resume' : 'pause';
+            });
             while (paused) {
                 await sleep(1000);
             }
@@ -490,22 +490,32 @@ function getCurrentEquippedAbility() {
                         const weaponsToEquip = [weapon1, weapon2].map(n => n.replace(/\s\d+$/, "")) ;
                         let usedId = '';
 
-                        for (let i = 1; i <= 2; i += 1) {
+                        const freeSlots = [];
+
+                        let x = weaponsToEquip.length;
+                        for (let i = 1; i <= x; i += 1) {
+                            const slot = document.querySelector(`#p1e${i}m`);
                             const equippedItemInSlot = getCurrentEquippedWeapon(i);
+                            console.log(weaponsToEquip, equippedItemInSlot);
                             if (weaponsToEquip.indexOf(equippedItemInSlot) > -1) {
                                 console.log(equippedItemInSlot, "equipped");
                                 weaponsToEquip.splice(weaponsToEquip.indexOf(equippedItemInSlot), 1);
-                                continue;
+                            } else {
+                                freeSlots.push(slot);
                             }
+                        }
+
+                        for (let i = 0; i <= freeSlots.length; i += 1) {
+                            const slot = freeSlots[i];
                             const weaponToEquip = weaponsToEquip.shift();
                             if (!weaponToEquip) {
                                 break;
                             }
-                            if (document.querySelector(`p1e${i}m.selected`)) {
-                                document.querySelector(`#p1e${i}m`).click();
+                            if (slot.classList.contains('.selected')) {
+                                slot.click();
                                 await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                             }
-                            document.querySelector(`#p1e${i}m`).click();
+                            slot.click();
                             await sleep(random_in_range(MIN_WAIT, MAX_WAIT));
                             const lis = document.querySelectorAll(`#p1equipment li`);
 
