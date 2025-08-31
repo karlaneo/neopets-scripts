@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Battledome Bot
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.3.0
+// @version      0.3.1
 // @description  A bot that automatically fights for you in battledome
 // @author       Karla
 // @match        *://*.neopets.com/dome/fight*
@@ -467,6 +467,8 @@ function getCurrentEquippedAbility() {
                 div.innerHTML = `${battlesLeft} battles left&nbsp;<button>${paused ? 'resume' : 'pause'}</button>`;
             } else if (battleType === 'infinite') {
                 div.innerHTML = `${battlesDone} battles done&nbsp;<button>${paused ? 'resume' : 'pause'}</button>`;
+            } else if (battleType === 'rewards') {
+                div.innerHTML = `<button>${paused ? 'resume' : 'pause'}</button>`;
             }
             div.querySelector('button').addEventListener('click', function() {
                 paused = !paused;
