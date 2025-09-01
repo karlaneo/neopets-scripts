@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Kiss The Mortog Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically plays kiss the mortog
 // @author       Karla
 // @match        *://*.neopets.com/medieval/kissthemortog.phtml*
@@ -60,7 +60,7 @@ function loop() {
           <option value="300">300</option>
           <option value="1150">1150</option>
           <option value="5900">5900</option>
-          <option value="35000">35000</option>
+          <option value="35000">35000 (staff review)</option>
           <option value="250000">250000 (staff review)</option>
           <option value="2000000">2000000 (staff review)</option>
           <option value="18000000">18000000 (staff review)</option>
