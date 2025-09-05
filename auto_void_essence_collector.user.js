@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's TVW Auto Void Essence Collector
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.3
+// @version      0.0.4
 // @description  Collects all void essence with one click!
 // @author       Karla
 // @match        *://*.neopets.com/tvw*
@@ -267,7 +267,7 @@ async function autoCollect(mapData) {
                             "cache-control": "no-cache",
                             "x-requested-with": "XMLHttpRequest"
                         },
-                        "referrer": "https://www.neopets.com/pirates/index.phtml",
+                        "referrer": url,
                         "body": formData,
                         "method": "POST",
                         "mode": "cors",
@@ -311,10 +311,10 @@ let vcItem;
     const [currentCount] = counter.innerHTML.split('/');
     button.id = 'k-button';
     button.className = 'button-default__2020 button-purple__2020 btn-single__2020 plothub-button';
-    console.log(counter, currentCount);
     button.innerHTML = currentCount == 10 ? 'Collect Completed' : 'Auto Collect';
     button.disabled = currentCount == 10;
     panel.appendChild(button);
+    console.log(button);
     button.addEventListener('click', function() { autoCollect(maps) });
     const status = document.createElement('div');
     status.id = 'k-status';
