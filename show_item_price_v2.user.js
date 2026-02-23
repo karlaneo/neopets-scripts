@@ -2,11 +2,12 @@
 // @name         Neopets - Karla's item price display V2
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Display item price from itemdb
 // @author       Karla
 // @match        *://*.neopets.com/safetydeposit*
 // @match        *://*.neopets.com/auctions*
+// @match        *://*.neopets.com/quickstock*
 // @homepage     https://neopointskarla.com
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
 // @grant        GM.xmlHttpRequest
