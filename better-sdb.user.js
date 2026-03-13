@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets - Karla's Better SDB
 // @license      GPL3
-// @namespace    http://tampermonkey.net/
+// @namespace    karla@neopointskarla
 // @homepage     https://neopointskarla.com
 // @version      0.1
 // @description  Display entire SDB on one page, better filters, more details on item
