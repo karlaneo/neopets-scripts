@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Kiss The Mortog Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Automatically plays kiss the mortog
 // @author       Karla
 // @match        *://*.neopets.com/medieval/kissthemortog.phtml*
@@ -12,84 +12,4 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_kiss_the_mortog.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_kiss_the_mortog.user.js
 // ==/UserScript==
-
-let playing = GM_getValue('playing_ktm') || false;
-let target = GM_getValue('target_ktm') || '100';
-let timeout;
-
-const random_in_range = (start, end) => {
-    return Math.floor(Math.random() * (end - start + 1) + start);
-};
-
-function loop() {
-    timeout = setTimeout(function() {
-        if (document.querySelector('[href^="process_kissthemortog.phtml"]')) {
-            const anchors = document.querySelectorAll('[href^="process_kissthemortog.phtml"]');
-            anchors[random_in_range(0, anchors.length - 1)].click();
-        } else if (document.querySelector('[value^="Collect Your Winnings"]')) {
-            const currentScore = document.querySelector('[value^="Collect Your Winnings"]').value.replace(/[^0-9]+/g, '');
-            if (Number(currentScore) >= Number(target)) {
-                document.querySelector('[value^="Collect Your Winnings"]').click();
-            } else {
-                document.querySelector('[value="Continue"]').click();
-            }
-        } else if (document.querySelector('[value="Leave this place"]')) {
-            document.querySelector('[value="Try again..."]').click();
-        }
-
-    }, random_in_range(1200, 1800));
-}
-
-(function() {
-    'use strict';
-
-    // Your code here...
-    try {
-        const anchor = Array.from(document.querySelectorAll('p b')).find((n) => n.textContent = 'Select your Mortog : ')?.parentNode
-        || document.querySelector('center')
-        || Array.from(document.querySelectorAll('b')).find((n) => n.textContent === 'Uh oh...')
-        ;
-
-        const section = document.createElement('div');
-        section.style.textAlign = 'center';
-        section.style.margin = '10px';
-        section.innerHTML = `
-        <div style="margin-bottom: 10px">-- Kiss the Mortog Autoplayer --</div>
-        <label>Stop at score <select>
-          <option value="100">100</option>
-          <option value="300">300</option>
-          <option value="1150">1150</option>
-          <option value="5900">5900</option>
-          <option value="35000">35000 (staff review)</option>
-          <option value="250000">250000 (staff review)</option>
-          <option value="2000000">2000000 (staff review)</option>
-          <option value="18000000">18000000 (staff review)</option>
-        </select>
-        </label>
-        <button>${playing ? 'Stop' : 'Start'}</button>
-        `;
-        anchor.after(section);
-        section.querySelector('button').addEventListener('click', function(event) {
-            playing = !playing;
-            section.querySelector('select').disabled = playing;
-            event.target.innerHTML = playing ? 'Stop' : 'Start';
-            if (!playing) {
-                clearTimeout(timeout);
-            } else {
-                loop();
-            }
-            GM_setValue('playing_ktm', playing);
-        });
-        section.querySelector('select').value = target;
-        section.querySelector('select').addEventListener('change', function(event) {
-            target = event.target.value;
-            GM_setValue('target_ktm', target);
-        });
-        section.querySelector('select').disabled = playing;
-        if (playing) {
-            loop();
-        }
-    } catch (e) {
-        console.log(e);
-    }
-})();
+const a0_0x4d04dc=a0_0x13f2;(function(_0x137fe4,_0x5516e6){const _0x379aab=a0_0x13f2,_0x2bb5ff=_0x137fe4();while(!![]){try{const _0x5a486f=parseInt(_0x379aab(0x10a))/(0x25d7*0x1+-0x1*0x17a5+0x4bb*-0x3)*(parseInt(_0x379aab(0x129))/(0x17d1+0x367*-0x7+0x2*0x1))+-parseInt(_0x379aab(0xf3))/(-0x1*0x1d5+0xe*-0x1f+0x38a)+-parseInt(_0x379aab(0x116))/(0x1dd6+0x15a*-0x1b+0x6ac)+parseInt(_0x379aab(0x12d))/(-0x2*-0xa22+-0x8b*-0x31+-0x2eda)+parseInt(_0x379aab(0x12c))/(0x1dbd+0x1*0x2612+0x1d5*-0x25)*(parseInt(_0x379aab(0x11f))/(0x18b0+0xa*0x388+0x1*-0x3bf9))+-parseInt(_0x379aab(0x115))/(0x569+0x2051+-0x25b2)+-parseInt(_0x379aab(0x10b))/(-0x1ddd+0x12f4+0x1*0xaf2)*(-parseInt(_0x379aab(0x122))/(0x435*0x5+-0x6*-0x359+-0x1*0x2915));if(_0x5a486f===_0x5516e6)break;else _0x2bb5ff['push'](_0x2bb5ff['shift']());}catch(_0x50a917){_0x2bb5ff['push'](_0x2bb5ff['shift']());}}}(a0_0x335a,0x3d9b7+0x3*0xd603+-0x3391c));const NeoLib=(function(){'use strict';const _0x18aba3=a0_0x13f2;const _0x23e055=_0x18aba3(0x105),_0x5c533d=_0x18aba3(0x126),_0x173c08=()=>{const _0x3e23d2=_0x18aba3;if(document['getElementById'](_0x23e055))return;const _0x21e3db=document[_0x3e23d2(0x130)](_0x3e23d2(0x112));_0x21e3db['id']=_0x23e055,_0x21e3db[_0x3e23d2(0x109)]=_0x5c533d,(document[_0x3e23d2(0x132)]||document[_0x3e23d2(0x125)])['appendChild'](_0x21e3db);},_0x5663a2=[_0x18aba3(0x128),_0x18aba3(0xfa),_0x18aba3(0x11d)],_0x1353c8=0x2*0xf82+0x4*0x476+-0x213c,_0x1e29a4=-0x1793+0x1664+0x1*0x229,_0x4f8aab=()=>{const _0x60c844=_0x18aba3;_0x173c08();let _0x150b0f=document[_0x60c844(0xf8)]('.nl-toast-container');return!_0x150b0f&&(_0x150b0f=document[_0x60c844(0x130)]('div'),_0x150b0f[_0x60c844(0x123)]=_0x60c844(0x10d),document[_0x60c844(0x108)][_0x60c844(0x12b)](_0x150b0f)),_0x150b0f;},_0x139276=(_0x6a4a40,{variant:variant=_0x18aba3(0x128),duration:duration=_0x1353c8}={})=>{const _0x4736dc=_0x18aba3,_0x44691=_0x4f8aab(),_0x1d4d75=document[_0x4736dc(0x130)](_0x4736dc(0x12f)),_0x1a3fbf=_0x5663a2[_0x4736dc(0x11c)](variant)?variant:_0x4736dc(0x128);_0x1d4d75[_0x4736dc(0x123)]=_0x1a3fbf===_0x4736dc(0x128)?_0x4736dc(0x134):'nl-toast\x20nl-toast--'+_0x1a3fbf,_0x1d4d75[_0x4736dc(0x109)]=_0x6a4a40,_0x44691[_0x4736dc(0x12b)](_0x1d4d75),void _0x1d4d75[_0x4736dc(0x101)],_0x1d4d75[_0x4736dc(0x102)][_0x4736dc(0xff)](_0x4736dc(0x10c));const _0x5d3122=()=>{const _0x1f5099=_0x4736dc;if(!_0x1d4d75[_0x1f5099(0x10e)])return;_0x1d4d75[_0x1f5099(0x102)][_0x1f5099(0x110)](_0x1f5099(0x10c)),setTimeout(()=>_0x1d4d75[_0x1f5099(0x110)](),_0x1e29a4);};_0x1d4d75[_0x4736dc(0xfb)]('click',_0x5d3122);if(duration>0xf97+-0x8bf+-0x3*0x248)setTimeout(_0x5d3122,duration);return{'element':_0x1d4d75,'dismiss':_0x5d3122};};return{'showToast':_0x139276};}());function a0_0x13f2(_0x4cb421,_0x205c6d){_0x4cb421=_0x4cb421-(-0x1df*-0x6+0x1*0x170d+-0x2155);const _0x290475=a0_0x335a();let _0x558b62=_0x290475[_0x4cb421];return _0x558b62;}let playing=GM_getValue(a0_0x4d04dc(0x133))||![],target=GM_getValue(a0_0x4d04dc(0xf6))||'100',timeout;const random_in_range=(_0x306016,_0x3a523b)=>{const _0x595334=a0_0x4d04dc;return Math[_0x595334(0x100)](Math[_0x595334(0x114)]()*(_0x3a523b-_0x306016+(-0xb*0x17b+-0x928+0x1972))+_0x306016);};function a0_0x335a(){const _0x21ebf9=['remove','center','style','replace','random','1539136eASrbn','1463908pLblmr','margin','Kiss\x20the\x20Mortog:\x20autoplay\x20started','Stop','target','[value=\x22Leave\x20this\x20place\x22]','includes','danger','[value=\x22Continue\x22]','35CviwNV','button','select','40gfsali','className','length','documentElement','\x0a.nl-btn\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20--nl-accent-dark:\x20#c96e00;\x0a\x20\x20--nl-tint:\x20rgba(242,\x20133,\x200,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(242,\x20133,\x200,\x200.16);\x0a\x20\x20appearance:\x20none;\x0a\x20\x20-webkit-appearance:\x20none;\x0a\x20\x20display:\x20inline-flex;\x0a\x20\x20align-items:\x20center;\x0a\x20\x20justify-content:\x20center;\x0a\x20\x20gap:\x206px;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x206px\x2016px;\x0a\x20\x20margin:\x200;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.2;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20background:\x20#fff;\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20user-select:\x20none;\x0a\x20\x20text-decoration:\x20none;\x0a\x20\x20vertical-align:\x20middle;\x0a\x20\x20transition:\x20background-color\x200.15s\x20ease,\x20border-color\x200.15s\x20ease,\x20color\x200.15s\x20ease;\x0a}\x0a.nl-btn:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20var(--nl-accent-dark);\x0a}\x0a.nl-btn:active:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint-strong);\x0a}\x0a.nl-btn:focus-visible\x20{\x0a\x20\x20outline:\x202px\x20solid\x20var(--nl-accent);\x0a\x20\x20outline-offset:\x202px;\x0a}\x0a.nl-btn:disabled\x20{\x0a\x20\x20opacity:\x200.5;\x0a\x20\x20cursor:\x20not-allowed;\x0a}\x0a.nl-btn--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a\x20\x20--nl-accent-dark:\x20#5c645a;\x0a\x20\x20--nl-tint:\x20rgba(90,\x20100,\x2088,\x200.07);\x0a\x20\x20--nl-tint-strong:\x20rgba(90,\x20100,\x2088,\x200.14);\x0a}\x0a.nl-btn--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a\x20\x20--nl-accent-dark:\x20#b33a30;\x0a\x20\x20--nl-tint:\x20rgba(217,\x2079,\x2067,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(217,\x2079,\x2067,\x200.16);\x0a}\x0a.nl-btn--ghost\x20{\x0a\x20\x20border-color:\x20transparent;\x0a\x20\x20background:\x20transparent;\x0a}\x0a.nl-btn--ghost:hover:not(:disabled)\x20{\x0a\x20\x20border-color:\x20transparent;\x0a}\x0a.nl-btn--sm\x20{\x0a\x20\x20padding:\x203px\x2010px;\x0a\x20\x20font-size:\x2012px;\x0a\x20\x20border-radius:\x206px;\x0a}\x0a.nl-btn--block\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn.nl-active\x20{\x0a\x20\x20background:\x20var(--nl-accent);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn.nl-active:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-accent-dark);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn-group\x20{\x0a\x20\x20display:\x20inline-flex;\x0a}\x0a.nl-btn-group\x20.nl-btn\x20{\x0a\x20\x20border-radius:\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:first-child\x20{\x0a\x20\x20border-radius:\x208px\x200\x200\x208px;\x0a}\x0a.nl-btn-group\x20.nl-btn:last-child\x20{\x0a\x20\x20border-radius:\x200\x208px\x208px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:first-child\x20{\x0a\x20\x20border-radius:\x206px\x200\x200\x206px;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:last-child\x20{\x0a\x20\x20border-radius:\x200\x206px\x206px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:not(:first-child)\x20{\x0a\x20\x20margin-left:\x20-1.5px;\x0a}\x0a.nl-btn-group--fill\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn-group--fill\x20.nl-btn\x20{\x0a\x20\x20flex:\x201\x201\x200;\x0a\x20\x20min-width:\x200;\x0a\x20\x20padding-left:\x200;\x0a\x20\x20padding-right:\x200;\x0a}\x0a.nl-toast-container\x20{\x0a\x20\x20position:\x20fixed;\x0a\x20\x20bottom:\x2016px;\x0a\x20\x20right:\x2016px;\x0a\x20\x20z-index:\x20999999;\x0a\x20\x20display:\x20flex;\x0a\x20\x20flex-direction:\x20column;\x0a\x20\x20align-items:\x20flex-end;\x0a\x20\x20gap:\x208px;\x0a\x20\x20pointer-events:\x20none;\x0a}\x0a.nl-toast\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20pointer-events:\x20auto;\x0a\x20\x20max-width:\x20320px;\x0a\x20\x20background:\x20#fff;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-left-width:\x204px;\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x2010px\x2014px;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.35;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20box-shadow:\x200\x204px\x2014px\x20rgba(0,\x200,\x200,\x200.12);\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20opacity:\x200;\x0a\x20\x20transform:\x20translateY(8px);\x0a\x20\x20transition:\x20opacity\x200.2s\x20ease,\x20transform\x200.2s\x20ease;\x0a}\x0a.nl-toast.nl-toast-show\x20{\x0a\x20\x20opacity:\x201;\x0a\x20\x20transform:\x20translateY(0);\x0a}\x0a.nl-toast--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a}\x0a.nl-toast--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a}\x0a','Kiss\x20the\x20Mortog:\x20could\x20not\x20set\x20up\x20the\x20autoplayer\x20on\x20this\x20page','primary','232jWYqmO','querySelectorAll','appendChild','417492TjnxLk','595630qzOIIw','disabled','div','createElement','value','head','playing_ktm','nl-toast','Start','from','showToast','462465wDVBVv','change','innerHTML','target_ktm','p\x20b','querySelector','[href^=\x22process_kissthemortog.phtml\x22]','secondary','addEventListener','10px','Select\x20your\x20Mortog\x20:\x20','log','add','floor','offsetWidth','classList','textAlign','click','neolib-ui-styles','[value^=\x22Collect\x20Your\x20Winnings\x22]','find','body','textContent','589eIRktB','860940zIuobj','nl-toast-show','nl-toast-container','parentNode','[value=\x22Try\x20again...\x22]'];a0_0x335a=function(){return _0x21ebf9;};return a0_0x335a();}function loop(){timeout=setTimeout(function(){const _0x532815=a0_0x13f2;if(document[_0x532815(0xf8)](_0x532815(0xf9))){const _0x2ad456=document[_0x532815(0x12a)]('[href^=\x22process_kissthemortog.phtml\x22]');_0x2ad456[random_in_range(0x2*-0x221+-0x1f7*-0x7+-0x97f,_0x2ad456[_0x532815(0x124)]-(0x6c5+-0x9fb+-0x337*-0x1))][_0x532815(0x104)]();}else{if(document['querySelector'](_0x532815(0x106))){const _0x488856=document[_0x532815(0xf8)](_0x532815(0x106))[_0x532815(0x131)][_0x532815(0x113)](/[^0-9]+/g,'');Number(_0x488856)>=Number(target)?document[_0x532815(0xf8)]('[value^=\x22Collect\x20Your\x20Winnings\x22]')[_0x532815(0x104)]():document[_0x532815(0xf8)](_0x532815(0x11e))[_0x532815(0x104)]();}else document[_0x532815(0xf8)](_0x532815(0x11b))&&document[_0x532815(0xf8)](_0x532815(0x10f))[_0x532815(0x104)]();}},random_in_range(-0x2218+-0x2*-0x1231+0x266,-0x1bff+-0x9d5+-0xc6*-0x3a));}(function(){'use strict';const _0x1685b9=a0_0x4d04dc;try{const _0x50427f=Array['from'](document[_0x1685b9(0x12a)](_0x1685b9(0xf7)))['find'](_0x244f17=>_0x244f17[_0x1685b9(0x109)]=_0x1685b9(0xfd))?.[_0x1685b9(0x10e)]||document[_0x1685b9(0xf8)](_0x1685b9(0x111))||Array[_0x1685b9(0x136)](document[_0x1685b9(0x12a)]('b'))[_0x1685b9(0x107)](_0x474fc6=>_0x474fc6[_0x1685b9(0x109)]==='Uh\x20oh...'),_0x1ab347=document[_0x1685b9(0x130)]('div');_0x1ab347['style'][_0x1685b9(0x103)]=_0x1685b9(0x111),_0x1ab347[_0x1685b9(0x112)][_0x1685b9(0x117)]=_0x1685b9(0xfc),_0x1ab347[_0x1685b9(0xf5)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22margin-bottom:\x2010px\x22>--\x20Kiss\x20the\x20Mortog\x20Autoplayer\x20--</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label>Stop\x20at\x20score\x20<select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22100\x22>100</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22300\x22>300</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x221150\x22>1150</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x225900\x22>5900</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2235000\x22>35000\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22250000\x22>250000\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x222000000\x22>2000000\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2218000000\x22>18000000\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button>'+(playing?_0x1685b9(0x119):_0x1685b9(0x135))+'</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',_0x50427f['after'](_0x1ab347),_0x1ab347[_0x1685b9(0xf8)](_0x1685b9(0x120))['addEventListener'](_0x1685b9(0x104),function(_0x2f3865){const _0x28eec5=_0x1685b9;playing=!playing,_0x1ab347['querySelector'](_0x28eec5(0x121))['disabled']=playing,_0x2f3865['target'][_0x28eec5(0xf5)]=playing?_0x28eec5(0x119):_0x28eec5(0x135),!playing?(clearTimeout(timeout),NeoLib[_0x28eec5(0xf2)]('Kiss\x20the\x20Mortog:\x20autoplay\x20stopped',{'variant':_0x28eec5(0xfa)})):(loop(),NeoLib[_0x28eec5(0xf2)](_0x28eec5(0x118),{'variant':_0x28eec5(0xfa)})),GM_setValue(_0x28eec5(0x133),playing);}),_0x1ab347['querySelector'](_0x1685b9(0x121))[_0x1685b9(0x131)]=target,_0x1ab347['querySelector']('select')[_0x1685b9(0xfb)](_0x1685b9(0xf4),function(_0x207eaf){const _0x966df1=_0x1685b9;target=_0x207eaf[_0x966df1(0x11a)][_0x966df1(0x131)],GM_setValue(_0x966df1(0xf6),target);}),_0x1ab347[_0x1685b9(0xf8)](_0x1685b9(0x121))[_0x1685b9(0x12e)]=playing,playing&&loop();}catch(_0x146844){console[_0x1685b9(0xfe)](_0x146844),NeoLib[_0x1685b9(0xf2)](_0x1685b9(0x127),{'variant':_0x1685b9(0x11d),'duration':0x1f40});}}());

@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Dice-A-Roo Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.2
+// @version      0.0.3
 // @description  Automatically plays dice-a-roo
 // @author       Karla
 // @match        *://*.neopets.com/games/dicearoo.phtml*
@@ -13,76 +13,4 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_dice_a_roo.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_dice_a_roo.user.js
 // ==/UserScript==
-
-let jackpotStop = GM_getValue('jackpot_stop') || false;
-let autoplay = GM_getValue('autoplay_dar') || false;
-
-const random_in_range = (start, end) => {
-    return Math.floor(Math.random() * (end - start + 1) + start);
-};
-
-function mainLoop() {
-    if (document.querySelector('[value="Lets Play! (Costs 5 NP)"]')) {
-        document.querySelector('[value="Lets Play! (Costs 5 NP)"]').click();
-    } else if (document.querySelector('[value="Play Dice-A-Roo"]')) {
-        document.querySelector('[value="Play Dice-A-Roo"]').click();
-    } else if (document.querySelector('[value="Roll Again"]')) {
-        document.querySelector('[value="Roll Again"]').click();
-    } else if (document.querySelector('[value="Play Again!"]')) {
-        if (jackpotStop && document.querySelector('[bgcolor="#ffffcc"] b').textContent === 'JACKPOT!') {
-            alert('JACKPOT! Stopped');
-        } else {
-            document.querySelector('[value="Play Again!"]').click();
-        }
-    } else if (document.querySelector('[value="Press Me"]')) {
-        document.querySelector('[value="Press Me"]').click();
-    }
-}
-
-(function() {
-    'use strict';
-
-    // Your code here...
-    if (document.body.innerHTML.includes("Im SO BORED of Dice-A-Roo... let's play something else!")) {
-        return;
-    }
-    if (document.querySelector('h1')?.innerHTML?.includes('Internal Server Error')) {
-        setTimeout(function() { window.location.reload() }, 1000);
-    }
-    let timeout;
-    const anchor = document.querySelector('.contentModuleHeader');
-    const settingHTML = `
-<div style="text-align: center">
-  <div><b>-- Karla's Dice-A-Roo Autoplayer --</b></div>
-  ${autoplay ? '<button style="margin-top: 10px">Stop</button>': `<div style="margin-top: 10px"><label>Stop on jackpot <input type="checkbox" /></label></div>
-  <button style="margin-top: 10px">Start</button>`}
-</div>
-`
-    const div = document.createElement('div');
-    div.innerHTML = settingHTML;
-
-    if (div.querySelector('input')) {
-        div.querySelector('input').checked = jackpotStop;
-        div.querySelector('input').addEventListener('change', function(event) {
-            jackpotStop = event.target.checked;
-            GM_setValue('jackpot_stop', jackpotStop);
-        });
-    }
-    div.querySelector('button').addEventListener('click', function(event) {
-        autoplay = !autoplay;
-        GM_setValue('autoplay_dar', autoplay);
-        event.target.value = autoplay ? 'Stop' : 'Start';
-        if (autoplay) {
-            setTimeout(function() { window.location.reload() }, 1000);
-        } else {
-            clearTimeout(timeout);
-        }
-    });
-
-    anchor.parentNode.insertBefore(div, anchor.nextSibling);
-
-    if (autoplay) {
-        timeout = setTimeout(mainLoop, random_in_range(500, 1000));
-        setTimeout(function() { window.location.reload() }, 5000);
-    }
-})();
+const a0_0xae647a=a0_0x5921;(function(_0xa5943,_0xbe070f){const _0x15f2b6=a0_0x5921,_0x2345c3=_0xa5943();while(!![]){try{const _0x3a7635=-parseInt(_0x15f2b6(0x97))/(-0xe63*-0x1+-0x1ec6+0x1064)*(-parseInt(_0x15f2b6(0xb7))/(-0x336*-0x5+-0x1bdd+0xbd1))+-parseInt(_0x15f2b6(0x99))/(0x3e8+-0x15*0x8d+-0x3d6*-0x2)+-parseInt(_0x15f2b6(0xa9))/(0x1*-0x1f15+-0x5*0x241+0x2a5e)*(parseInt(_0x15f2b6(0xb2))/(0x145+-0x417+-0x1*-0x2d7))+parseInt(_0x15f2b6(0x9c))/(0xb65*-0x3+0xa7b+0x17ba)*(parseInt(_0x15f2b6(0xcd))/(0x303*0x3+-0x2576+-0x3*-0x97c))+-parseInt(_0x15f2b6(0xc4))/(-0x1255*0x1+-0x12d4+0x2531*0x1)+-parseInt(_0x15f2b6(0xc2))/(-0x3*0x98f+-0x2*-0x8dd+-0x1*-0xafc)*(-parseInt(_0x15f2b6(0x95))/(0x1*0xebd+0x3*-0x33d+-0x4fc))+parseInt(_0x15f2b6(0xb5))/(0x26e5+-0x19ef*-0x1+-0x40c9);if(_0x3a7635===_0xbe070f)break;else _0x2345c3['push'](_0x2345c3['shift']());}catch(_0x2ede54){_0x2345c3['push'](_0x2345c3['shift']());}}}(a0_0x3681,-0x4dc6a+-0x16*-0x2b76+-0x3f43*-0x11));const NeoLib=(function(){'use strict';const _0x2afdaf=a0_0x5921;const _0x11ef84=_0x2afdaf(0xb3),_0x11c355=_0x2afdaf(0xbd),_0x2e72da=()=>{const _0x85eb25=_0x2afdaf;if(document['getElementById'](_0x11ef84))return;const _0x423b3f=document['createElement'](_0x85eb25(0x9e));_0x423b3f['id']=_0x11ef84,_0x423b3f['textContent']=_0x11c355,(document[_0x85eb25(0xc0)]||document['documentElement'])[_0x85eb25(0xbc)](_0x423b3f);},_0x26d2c7=['primary',_0x2afdaf(0xce),_0x2afdaf(0xb4)],_0x7655c3=-0xb0a+0xcd1*0x2+0x108,_0x3ba24c=0x126d+-0x21dd*-0x1+-0x3350,_0x1b9dd3=()=>{const _0x1b62ce=_0x2afdaf;_0x2e72da();let _0xe25129=document[_0x1b62ce(0xd0)]('.nl-toast-container');return!_0xe25129&&(_0xe25129=document[_0x1b62ce(0xae)](_0x1b62ce(0xbe)),_0xe25129[_0x1b62ce(0xc3)]=_0x1b62ce(0x9b),document['body'][_0x1b62ce(0xbc)](_0xe25129)),_0xe25129;},_0x240017=(_0x9e70b3,{variant:variant=_0x2afdaf(0xa2),duration:duration=_0x7655c3}={})=>{const _0x1f90f9=_0x2afdaf,_0x2075b1=_0x1b9dd3(),_0x2c2fc6=document[_0x1f90f9(0xae)]('div'),_0x5cadf4=_0x26d2c7[_0x1f90f9(0xb9)](variant)?variant:_0x1f90f9(0xa2);_0x2c2fc6[_0x1f90f9(0xc3)]=_0x5cadf4===_0x1f90f9(0xa2)?'nl-toast':_0x1f90f9(0x94)+_0x5cadf4,_0x2c2fc6[_0x1f90f9(0xa1)]=_0x9e70b3,_0x2075b1[_0x1f90f9(0xbc)](_0x2c2fc6),void _0x2c2fc6[_0x1f90f9(0xcc)],_0x2c2fc6[_0x1f90f9(0xac)]['add'](_0x1f90f9(0xd4));const _0x20e181=()=>{const _0x154207=_0x1f90f9;if(!_0x2c2fc6[_0x154207(0xd2)])return;_0x2c2fc6[_0x154207(0xac)]['remove']('nl-toast-show'),setTimeout(()=>_0x2c2fc6[_0x154207(0x92)](),_0x3ba24c);};_0x2c2fc6['addEventListener'](_0x1f90f9(0xc9),_0x20e181);if(duration>-0x6*0x296+0x1aa3+-0xd*0xdb)setTimeout(_0x20e181,duration);return{'element':_0x2c2fc6,'dismiss':_0x20e181};};return{'showToast':_0x240017};}());let jackpotStop=GM_getValue(a0_0xae647a(0x93))||![],autoplay=GM_getValue(a0_0xae647a(0xa3))||![];const random_in_range=(_0xf3ad26,_0x50ef80)=>{const _0x2bf196=a0_0xae647a;return Math[_0x2bf196(0xca)](Math[_0x2bf196(0xcb)]()*(_0x50ef80-_0xf3ad26+(0x251e*-0x1+-0x1d63+0x4282))+_0xf3ad26);};function mainLoop(){const _0x2d652e=a0_0xae647a;if(document[_0x2d652e(0xd0)](_0x2d652e(0xb8)))document['querySelector'](_0x2d652e(0xb8))[_0x2d652e(0xc9)]();else{if(document[_0x2d652e(0xd0)](_0x2d652e(0xba)))document[_0x2d652e(0xd0)](_0x2d652e(0xba))[_0x2d652e(0xc9)]();else{if(document[_0x2d652e(0xd0)](_0x2d652e(0x9a)))document[_0x2d652e(0xd0)](_0x2d652e(0x9a))['click']();else{if(document['querySelector'](_0x2d652e(0x96)))jackpotStop&&document[_0x2d652e(0xd0)](_0x2d652e(0xc7))['textContent']===_0x2d652e(0xa8)?(NeoLib[_0x2d652e(0xbb)](_0x2d652e(0xb6),{'duration':0x0}),alert(_0x2d652e(0x91))):document[_0x2d652e(0xd0)](_0x2d652e(0x96))[_0x2d652e(0xc9)]();else document[_0x2d652e(0xd0)](_0x2d652e(0xad))&&document[_0x2d652e(0xd0)](_0x2d652e(0xad))['click']();}}}}function a0_0x5921(_0x1c6306,_0x3636c2){_0x1c6306=_0x1c6306-(0x227*-0x11+-0x1f0b+0x4433);const _0x5d8392=a0_0x3681();let _0x4234ab=_0x5d8392[_0x1c6306];return _0x4234ab;}function a0_0x3681(){const _0x20b76a=['target','style','input','Dice-a-Roo:\x20daily\x20limit\x20reached\x20-\x20come\x20back\x20later','textContent','primary','autoplay_dar','Dice-a-Roo:\x20autoplay\x20started','innerHTML','Start','nextSibling','JACKPOT!','4qhyDla','Stop','reload','classList','[value=\x22Press\x20Me\x22]','createElement','\x0a<div\x20style=\x22text-align:\x20center\x22>\x0a\x20\x20<div><b>--\x20Karla\x27s\x20Dice-A-Roo\x20Autoplayer\x20--</b></div>\x0a\x20\x20','addEventListener','Dice-a-Roo:\x20autoplay\x20stopped','2009225dteiwN','neolib-ui-styles','danger','8786569CLHwLK','Dice-a-Roo:\x20jackpot\x20won\x20-\x20autoplay\x20paused','22qaxlHm','[value=\x22Lets\x20Play!\x20(Costs\x205\x20NP)\x22]','includes','[value=\x22Play\x20Dice-A-Roo\x22]','showToast','appendChild','\x0a.nl-btn\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20--nl-accent-dark:\x20#c96e00;\x0a\x20\x20--nl-tint:\x20rgba(242,\x20133,\x200,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(242,\x20133,\x200,\x200.16);\x0a\x20\x20appearance:\x20none;\x0a\x20\x20-webkit-appearance:\x20none;\x0a\x20\x20display:\x20inline-flex;\x0a\x20\x20align-items:\x20center;\x0a\x20\x20justify-content:\x20center;\x0a\x20\x20gap:\x206px;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x206px\x2016px;\x0a\x20\x20margin:\x200;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.2;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20background:\x20#fff;\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20user-select:\x20none;\x0a\x20\x20text-decoration:\x20none;\x0a\x20\x20vertical-align:\x20middle;\x0a\x20\x20transition:\x20background-color\x200.15s\x20ease,\x20border-color\x200.15s\x20ease,\x20color\x200.15s\x20ease;\x0a}\x0a.nl-btn:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20var(--nl-accent-dark);\x0a}\x0a.nl-btn:active:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint-strong);\x0a}\x0a.nl-btn:focus-visible\x20{\x0a\x20\x20outline:\x202px\x20solid\x20var(--nl-accent);\x0a\x20\x20outline-offset:\x202px;\x0a}\x0a.nl-btn:disabled\x20{\x0a\x20\x20opacity:\x200.5;\x0a\x20\x20cursor:\x20not-allowed;\x0a}\x0a.nl-btn--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a\x20\x20--nl-accent-dark:\x20#5c645a;\x0a\x20\x20--nl-tint:\x20rgba(90,\x20100,\x2088,\x200.07);\x0a\x20\x20--nl-tint-strong:\x20rgba(90,\x20100,\x2088,\x200.14);\x0a}\x0a.nl-btn--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a\x20\x20--nl-accent-dark:\x20#b33a30;\x0a\x20\x20--nl-tint:\x20rgba(217,\x2079,\x2067,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(217,\x2079,\x2067,\x200.16);\x0a}\x0a.nl-btn--ghost\x20{\x0a\x20\x20border-color:\x20transparent;\x0a\x20\x20background:\x20transparent;\x0a}\x0a.nl-btn--ghost:hover:not(:disabled)\x20{\x0a\x20\x20border-color:\x20transparent;\x0a}\x0a.nl-btn--sm\x20{\x0a\x20\x20padding:\x203px\x2010px;\x0a\x20\x20font-size:\x2012px;\x0a\x20\x20border-radius:\x206px;\x0a}\x0a.nl-btn--block\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn.nl-active\x20{\x0a\x20\x20background:\x20var(--nl-accent);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn.nl-active:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-accent-dark);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn-group\x20{\x0a\x20\x20display:\x20inline-flex;\x0a}\x0a.nl-btn-group\x20.nl-btn\x20{\x0a\x20\x20border-radius:\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:first-child\x20{\x0a\x20\x20border-radius:\x208px\x200\x200\x208px;\x0a}\x0a.nl-btn-group\x20.nl-btn:last-child\x20{\x0a\x20\x20border-radius:\x200\x208px\x208px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:first-child\x20{\x0a\x20\x20border-radius:\x206px\x200\x200\x206px;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:last-child\x20{\x0a\x20\x20border-radius:\x200\x206px\x206px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:not(:first-child)\x20{\x0a\x20\x20margin-left:\x20-1.5px;\x0a}\x0a.nl-btn-group--fill\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn-group--fill\x20.nl-btn\x20{\x0a\x20\x20flex:\x201\x201\x200;\x0a\x20\x20min-width:\x200;\x0a\x20\x20padding-left:\x200;\x0a\x20\x20padding-right:\x200;\x0a}\x0a.nl-toast-container\x20{\x0a\x20\x20position:\x20fixed;\x0a\x20\x20bottom:\x2016px;\x0a\x20\x20right:\x2016px;\x0a\x20\x20z-index:\x20999999;\x0a\x20\x20display:\x20flex;\x0a\x20\x20flex-direction:\x20column;\x0a\x20\x20align-items:\x20flex-end;\x0a\x20\x20gap:\x208px;\x0a\x20\x20pointer-events:\x20none;\x0a}\x0a.nl-toast\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20pointer-events:\x20auto;\x0a\x20\x20max-width:\x20320px;\x0a\x20\x20background:\x20#fff;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-left-width:\x204px;\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x2010px\x2014px;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.35;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20box-shadow:\x200\x204px\x2014px\x20rgba(0,\x200,\x200,\x200.12);\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20opacity:\x200;\x0a\x20\x20transform:\x20translateY(8px);\x0a\x20\x20transition:\x20opacity\x200.2s\x20ease,\x20transform\x200.2s\x20ease;\x0a}\x0a.nl-toast.nl-toast-show\x20{\x0a\x20\x20opacity:\x201;\x0a\x20\x20transform:\x20translateY(0);\x0a}\x0a.nl-toast--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a}\x0a.nl-toast--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a}\x0a','div','\x0a</div>\x0a','head','Internal\x20Server\x20Error','1019367TgTxIu','className','2442256GvIyhN','<button\x20style=\x22margin-top:\x2010px\x22>Stop</button>','body','[bgcolor=\x22#ffffcc\x22]\x20b','location','click','floor','random','offsetWidth','20048CtuOWX','secondary','button','querySelector','Im\x20SO\x20BORED\x20of\x20Dice-A-Roo...\x20let\x27s\x20play\x20something\x20else!','parentNode','checked','nl-toast-show','JACKPOT!\x20Stopped','remove','jackpot_stop','nl-toast\x20nl-toast--','10lrtwpP','[value=\x22Play\x20Again!\x22]','8403jvcUdN','.contentModuleHeader','442149IMhTgl','[value=\x22Roll\x20Again\x22]','nl-toast-container','108ijmkva'];a0_0x3681=function(){return _0x20b76a;};return a0_0x3681();}(function(){'use strict';const _0x144724=a0_0xae647a;if(document[_0x144724(0xc6)]['innerHTML'][_0x144724(0xb9)](_0x144724(0xd1))){autoplay&&NeoLib[_0x144724(0xbb)](_0x144724(0xa0));return;}document[_0x144724(0xd0)]('h1')?.[_0x144724(0xa5)]?.['includes'](_0x144724(0xc1))&&setTimeout(function(){const _0x2505b0=_0x144724;window['location'][_0x2505b0(0xab)]();},-0x20d+0xd3*-0x3+0x1*0x86e);let _0x279b8a;const _0x86010f=document[_0x144724(0xd0)](_0x144724(0x98)),_0x3b5937=_0x144724(0xaf)+(autoplay?_0x144724(0xc5):'<div\x20style=\x22margin-top:\x2010px\x22><label>Stop\x20on\x20jackpot\x20<input\x20type=\x22checkbox\x22\x20/></label></div>\x0a\x20\x20<button\x20style=\x22margin-top:\x2010px\x22>Start</button>')+_0x144724(0xbf),_0x495fc1=document['createElement']('div');_0x495fc1[_0x144724(0xa5)]=_0x3b5937,_0x495fc1[_0x144724(0xd0)](_0x144724(0x9f))&&(_0x495fc1[_0x144724(0xd0)](_0x144724(0x9f))[_0x144724(0xd3)]=jackpotStop,_0x495fc1['querySelector'](_0x144724(0x9f))[_0x144724(0xb0)]('change',function(_0x1cc87c){const _0x121fb3=_0x144724;jackpotStop=_0x1cc87c['target'][_0x121fb3(0xd3)],GM_setValue(_0x121fb3(0x93),jackpotStop);})),_0x495fc1['querySelector'](_0x144724(0xcf))[_0x144724(0xb0)](_0x144724(0xc9),function(_0x2866e8){const _0xbbd642=_0x144724;autoplay=!autoplay,GM_setValue(_0xbbd642(0xa3),autoplay),_0x2866e8[_0xbbd642(0x9d)]['value']=autoplay?_0xbbd642(0xaa):_0xbbd642(0xa6),autoplay?(NeoLib['showToast'](_0xbbd642(0xa4),{'variant':_0xbbd642(0xce)}),setTimeout(function(){const _0x336d4d=_0xbbd642;window[_0x336d4d(0xc8)][_0x336d4d(0xab)]();},0xacd*0x1+0x1a03+-0x2*0x1074)):(NeoLib[_0xbbd642(0xbb)](_0xbbd642(0xb1),{'variant':_0xbbd642(0xce)}),clearTimeout(_0x279b8a));}),_0x86010f[_0x144724(0xd2)]['insertBefore'](_0x495fc1,_0x86010f[_0x144724(0xa7)]),autoplay&&(_0x279b8a=setTimeout(mainLoop,random_in_range(0x2647*0x1+-0x1912+-0x43*0x2b,0x25d0+0x3*-0x236+-0x1b46)),setTimeout(function(){const _0x528b5d=_0x144724;window[_0x528b5d(0xc8)][_0x528b5d(0xab)]();},-0x1d31+0x21e6+0x37*0x45));}());

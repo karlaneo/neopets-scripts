@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Gormball Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically plays Gormball
 // @author       Karla
 // @match        *://*.neopets.com/space/gormball.phtml*
@@ -13,69 +13,4 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_gormball.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_gormball.user.js
 // ==/UserScript==
-
-let playing = GM_getValue('playing_gormball') || false;
-let timeout;
-
-const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
-const random_in_range = (start, end) => {
-    return Math.floor(Math.random() * (end - start + 1) + start);
-};
-
-function loop() {
-    timeout = setTimeout(async function() {
-        console.log(document.querySelector('#playerDD'))
-        if (document.querySelector('#playerDD')) {
-            await sleep(random_in_range(600, 900));
-            document.querySelector('#playerDD').selectedIndex = random_in_range(1, document.querySelectorAll('#playerDD option').length - 1);
-            await sleep(random_in_range(600, 900));
-            document.querySelector('[value="Plaaay Ball!"]').click();
-        } else if (document.querySelector('[value="Next >>>"]')) {
-            await sleep(random_in_range(600, 900));
-            document.querySelector('[value="Next >>>"]').click();
-        } else if (document.querySelector('[name="turns_waited"]')) {
-            await sleep(random_in_range(600, 900));
-            document.querySelector('[name="turns_waited"]').selectedIndex = 1;
-            await sleep(random_in_range(600, 900));
-            document.querySelector('[value="Throw!"]').click();
-        } else if (document.querySelector('[value="Continue!"]')) {
-            document.querySelector('[value="Continue!"]').click();
-        } else if (document.querySelector('[value="Play Again"]')) {
-            document.querySelector('[value="Play Again"]').click();
-        }
-
-    }, random_in_range(1200, 1800));
-}
-
-(function() {
-    'use strict';
-
-    // Your code here...
-    try {
-        const anchor = document.querySelector('#content .content b');
-
-        const section = document.createElement('div');
-        section.style.textAlign = 'center';
-        section.style.margin = '10px';
-        section.innerHTML = `
-        <div style="margin-bottom: 10px">-- Gormball Autoplayer --</div>
-        <button>${playing ? 'Stop' : 'Start'}</button>
-        `;
-        anchor.after(section);
-        section.querySelector('button').addEventListener('click', function(event) {
-            playing = !playing;
-            event.target.innerHTML = playing ? 'Stop' : 'Start';
-            if (!playing) {
-                clearTimeout(timeout);
-            } else {
-                loop();
-            }
-            GM_setValue('playing_gormball', playing);
-        });
-        if (playing) {
-            loop();
-        }
-    } catch (e) {
-        console.log(e);
-    }
-})();
+(function(_0x1c9e7e,_0x508a19){const _0x9f018d=a0_0x3e97,_0xb23296=_0x1c9e7e();while(!![]){try{const _0x2307a0=parseInt(_0x9f018d(0x1c4))/(0x3*0x491+0x2700+-0x34b2)+-parseInt(_0x9f018d(0x1dc))/(0xa37*-0x1+-0x10c6+-0x1aff*-0x1)*(parseInt(_0x9f018d(0x1ef))/(0xf6+-0x30d*0xb+0x209c))+parseInt(_0x9f018d(0x1ec))/(0x9b7+-0x1ca8+0x17*0xd3)+parseInt(_0x9f018d(0x1c5))/(0x1532+-0xb25+0x504*-0x2)*(parseInt(_0x9f018d(0x1b9))/(-0x43*0xf+0x254f+0x14*-0x1ab))+-parseInt(_0x9f018d(0x1cc))/(-0x1d2*0x3+-0x1147+0x1*0x16c4)+parseInt(_0x9f018d(0x1bc))/(-0x1*-0x1a85+0x8*-0x106+-0x124d)*(parseInt(_0x9f018d(0x1da))/(-0xa06+-0x1b9a+0x1f*0x137))+-parseInt(_0x9f018d(0x1cb))/(-0xfbb+-0x19ff+0x29c4)*(parseInt(_0x9f018d(0x1c7))/(-0x3d*0x1d+0x7e4+-0xf0));if(_0x2307a0===_0x508a19)break;else _0xb23296['push'](_0xb23296['shift']());}catch(_0x2c7b66){_0xb23296['push'](_0xb23296['shift']());}}}(a0_0x5a96,-0x170a2+-0x9c64c+0x16*0xbe4c));const NeoLib=(function(){'use strict';const _0x54f3b3=a0_0x3e97;const _0x55e7d7=_0x54f3b3(0x1ea),_0x3d9d34='\x0a.nl-btn\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20--nl-accent-dark:\x20#c96e00;\x0a\x20\x20--nl-tint:\x20rgba(242,\x20133,\x200,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(242,\x20133,\x200,\x200.16);\x0a\x20\x20appearance:\x20none;\x0a\x20\x20-webkit-appearance:\x20none;\x0a\x20\x20display:\x20inline-flex;\x0a\x20\x20align-items:\x20center;\x0a\x20\x20justify-content:\x20center;\x0a\x20\x20gap:\x206px;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x206px\x2016px;\x0a\x20\x20margin:\x200;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.2;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20background:\x20#fff;\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20user-select:\x20none;\x0a\x20\x20text-decoration:\x20none;\x0a\x20\x20vertical-align:\x20middle;\x0a\x20\x20transition:\x20background-color\x200.15s\x20ease,\x20border-color\x200.15s\x20ease,\x20color\x200.15s\x20ease;\x0a}\x0a.nl-btn:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20var(--nl-accent-dark);\x0a}\x0a.nl-btn:active:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint-strong);\x0a}\x0a.nl-btn:focus-visible\x20{\x0a\x20\x20outline:\x202px\x20solid\x20var(--nl-accent);\x0a\x20\x20outline-offset:\x202px;\x0a}\x0a.nl-btn:disabled\x20{\x0a\x20\x20opacity:\x200.5;\x0a\x20\x20cursor:\x20not-allowed;\x0a}\x0a.nl-btn--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a\x20\x20--nl-accent-dark:\x20#5c645a;\x0a\x20\x20--nl-tint:\x20rgba(90,\x20100,\x2088,\x200.07);\x0a\x20\x20--nl-tint-strong:\x20rgba(90,\x20100,\x2088,\x200.14);\x0a}\x0a.nl-btn--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a\x20\x20--nl-accent-dark:\x20#b33a30;\x0a\x20\x20--nl-tint:\x20rgba(217,\x2079,\x2067,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(217,\x2079,\x2067,\x200.16);\x0a}\x0a.nl-btn--ghost\x20{\x0a\x20\x20border-color:\x20transparent;\x0a\x20\x20background:\x20transparent;\x0a}\x0a.nl-btn--ghost:hover:not(:disabled)\x20{\x0a\x20\x20border-color:\x20transparent;\x0a}\x0a.nl-btn--sm\x20{\x0a\x20\x20padding:\x203px\x2010px;\x0a\x20\x20font-size:\x2012px;\x0a\x20\x20border-radius:\x206px;\x0a}\x0a.nl-btn--block\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn.nl-active\x20{\x0a\x20\x20background:\x20var(--nl-accent);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn.nl-active:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-accent-dark);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn-group\x20{\x0a\x20\x20display:\x20inline-flex;\x0a}\x0a.nl-btn-group\x20.nl-btn\x20{\x0a\x20\x20border-radius:\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:first-child\x20{\x0a\x20\x20border-radius:\x208px\x200\x200\x208px;\x0a}\x0a.nl-btn-group\x20.nl-btn:last-child\x20{\x0a\x20\x20border-radius:\x200\x208px\x208px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:first-child\x20{\x0a\x20\x20border-radius:\x206px\x200\x200\x206px;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:last-child\x20{\x0a\x20\x20border-radius:\x200\x206px\x206px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:not(:first-child)\x20{\x0a\x20\x20margin-left:\x20-1.5px;\x0a}\x0a.nl-btn-group--fill\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn-group--fill\x20.nl-btn\x20{\x0a\x20\x20flex:\x201\x201\x200;\x0a\x20\x20min-width:\x200;\x0a\x20\x20padding-left:\x200;\x0a\x20\x20padding-right:\x200;\x0a}\x0a.nl-toast-container\x20{\x0a\x20\x20position:\x20fixed;\x0a\x20\x20bottom:\x2016px;\x0a\x20\x20right:\x2016px;\x0a\x20\x20z-index:\x20999999;\x0a\x20\x20display:\x20flex;\x0a\x20\x20flex-direction:\x20column;\x0a\x20\x20align-items:\x20flex-end;\x0a\x20\x20gap:\x208px;\x0a\x20\x20pointer-events:\x20none;\x0a}\x0a.nl-toast\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20pointer-events:\x20auto;\x0a\x20\x20max-width:\x20320px;\x0a\x20\x20background:\x20#fff;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-left-width:\x204px;\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x2010px\x2014px;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.35;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20box-shadow:\x200\x204px\x2014px\x20rgba(0,\x200,\x200,\x200.12);\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20opacity:\x200;\x0a\x20\x20transform:\x20translateY(8px);\x0a\x20\x20transition:\x20opacity\x200.2s\x20ease,\x20transform\x200.2s\x20ease;\x0a}\x0a.nl-toast.nl-toast-show\x20{\x0a\x20\x20opacity:\x201;\x0a\x20\x20transform:\x20translateY(0);\x0a}\x0a.nl-toast--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a}\x0a.nl-toast--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a}\x0a',_0xcea9d0=()=>{const _0x426ab4=_0x54f3b3;if(document[_0x426ab4(0x1de)](_0x55e7d7))return;const _0x1e9be4=document['createElement']('style');_0x1e9be4['id']=_0x55e7d7,_0x1e9be4[_0x426ab4(0x1c2)]=_0x3d9d34,(document[_0x426ab4(0x1c6)]||document[_0x426ab4(0x1ed)])[_0x426ab4(0x1e4)](_0x1e9be4);},_0x237517=[_0x54f3b3(0x1d7),_0x54f3b3(0x1f0),_0x54f3b3(0x1f4)],_0x5664dc=0x2456*-0x1+0x1b*-0xd3+0x18bd*0x3,_0x30a7f0=-0xf*-0x47+0x25*-0x80+0xf51,_0x26f972=()=>{const _0x4bd663=_0x54f3b3;_0xcea9d0();let _0x41c2c1=document['querySelector'](_0x4bd663(0x1be));return!_0x41c2c1&&(_0x41c2c1=document[_0x4bd663(0x1dd)](_0x4bd663(0x1d1)),_0x41c2c1[_0x4bd663(0x1c8)]=_0x4bd663(0x1e2),document[_0x4bd663(0x1df)][_0x4bd663(0x1e4)](_0x41c2c1)),_0x41c2c1;},_0x247cb6=(_0x16a6cf,{variant:variant='primary',duration:duration=_0x5664dc}={})=>{const _0x56b6e1=_0x54f3b3,_0x5dec61=_0x26f972(),_0x25ff2b=document[_0x56b6e1(0x1dd)]('div'),_0xd4026b=_0x237517[_0x56b6e1(0x1e0)](variant)?variant:'primary';_0x25ff2b[_0x56b6e1(0x1c8)]=_0xd4026b===_0x56b6e1(0x1d7)?_0x56b6e1(0x1e5):_0x56b6e1(0x1bb)+_0xd4026b,_0x25ff2b[_0x56b6e1(0x1c2)]=_0x16a6cf,_0x5dec61[_0x56b6e1(0x1e4)](_0x25ff2b),void _0x25ff2b[_0x56b6e1(0x1e6)],_0x25ff2b[_0x56b6e1(0x1f5)][_0x56b6e1(0x1d0)](_0x56b6e1(0x1bd));const _0x19697a=()=>{const _0x3cc660=_0x56b6e1;if(!_0x25ff2b[_0x3cc660(0x1d6)])return;_0x25ff2b[_0x3cc660(0x1f5)][_0x3cc660(0x1e9)](_0x3cc660(0x1bd)),setTimeout(()=>_0x25ff2b[_0x3cc660(0x1e9)](),_0x30a7f0);};_0x25ff2b[_0x56b6e1(0x1ee)]('click',_0x19697a);if(duration>-0x17a5+0x204d+-0x8a8)setTimeout(_0x19697a,duration);return{'element':_0x25ff2b,'dismiss':_0x19697a};};return{'showToast':_0x247cb6};}());function a0_0x5a96(){const _0x508bc7=['head','253VCsNUU','className','margin','selectedIndex','133050PtGZyr','4395468gUTrSD','Gormball:\x20autoplay\x20started','[name=\x22turns_waited\x22]','#playerDD\x20option','add','div','center','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22margin-bottom:\x2010px\x22>--\x20Gormball\x20Autoplayer\x20--</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button>','[value=\x22Play\x20Again\x22]','#playerDD','parentNode','primary','showToast','querySelector','63WqJJuA','innerHTML','522522JFCxFs','createElement','getElementById','body','includes','Gormball:\x20autoplay\x20stopped','nl-toast-container','Stop','appendChild','nl-toast','offsetWidth','style','10px','remove','neolib-ui-styles','log','2438196DlpIRE','documentElement','addEventListener','3eElzOv','secondary','floor','after','Gormball:\x20could\x20not\x20set\x20up\x20the\x20autoplayer\x20on\x20this\x20page','danger','classList','[value=\x22Throw!\x22]','263982agYkAm','Start','nl-toast\x20nl-toast--','236032YhBfLZ','nl-toast-show','.nl-toast-container','click','random','[value=\x22Next\x20>>>\x22]','textContent','textAlign','671920TobHFw','5JcnpPZ'];a0_0x5a96=function(){return _0x508bc7;};return a0_0x5a96();}let playing=GM_getValue('playing_gormball')||![],timeout;const sleep=_0x400732=>new Promise(_0x15725a=>setTimeout(_0x15725a,_0x400732)),random_in_range=(_0x1a4c59,_0x171c63)=>{const _0x1eb0e6=a0_0x3e97;return Math[_0x1eb0e6(0x1f1)](Math[_0x1eb0e6(0x1c0)]()*(_0x171c63-_0x1a4c59+(-0xa71+-0x2266*-0x1+0x1c*-0xdb))+_0x1a4c59);};function a0_0x3e97(_0x189e91,_0x58b093){_0x189e91=_0x189e91-(0x3*-0x45d+-0x185e+0x272d);const _0x325b33=a0_0x5a96();let _0x438a6a=_0x325b33[_0x189e91];return _0x438a6a;}function loop(){timeout=setTimeout(async function(){const _0x52b6b9=a0_0x3e97;console[_0x52b6b9(0x1eb)](document[_0x52b6b9(0x1d9)]('#playerDD'));if(document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1d5)))await sleep(random_in_range(-0x3d7+-0x96a+0xf99,0x59d+0x708+-0x921)),document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1d5))[_0x52b6b9(0x1ca)]=random_in_range(-0x1d*-0xaa+0x102d+0x236e*-0x1,document['querySelectorAll'](_0x52b6b9(0x1cf))['length']-(-0x13*0x13+0x2050+-0x1ee6)),await sleep(random_in_range(0x2*-0x6ed+-0x21*0x115+0x33e7,-0x1833+0x2051*-0x1+-0x22*-0x1c4)),document['querySelector']('[value=\x22Plaaay\x20Ball!\x22]')[_0x52b6b9(0x1bf)]();else{if(document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1c1)))await sleep(random_in_range(0x1112+0xb9*-0xd+-0x555,0x9f*0x1d+-0xbe1*0x1+-0x29e)),document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1c1))[_0x52b6b9(0x1bf)]();else{if(document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1ce)))await sleep(random_in_range(-0x605*0x3+-0x2140+0x35a7,0x5b5+-0x1ec6+0x1c95)),document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1ce))['selectedIndex']=-0x5ca+0x2071+0x12*-0x17b,await sleep(random_in_range(0x1*-0x2341+0x3*-0xb99+-0x29*-0x1c4,-0x29*-0x7c+0x4*-0x1e5+-0x8c4)),document[_0x52b6b9(0x1d9)](_0x52b6b9(0x1b8))[_0x52b6b9(0x1bf)]();else{if(document[_0x52b6b9(0x1d9)]('[value=\x22Continue!\x22]'))document[_0x52b6b9(0x1d9)]('[value=\x22Continue!\x22]')[_0x52b6b9(0x1bf)]();else document['querySelector'](_0x52b6b9(0x1d4))&&document['querySelector'](_0x52b6b9(0x1d4))['click']();}}}},random_in_range(0x3d*0x76+0xf4e+0x26bc*-0x1,-0x137a+-0x2cf*-0x2+-0xe*-0x17e));}(function(){'use strict';const _0x11f85f=a0_0x3e97;try{const _0x476aae=document[_0x11f85f(0x1d9)]('#content\x20.content\x20b'),_0x4cac54=document['createElement'](_0x11f85f(0x1d1));_0x4cac54[_0x11f85f(0x1e7)][_0x11f85f(0x1c3)]=_0x11f85f(0x1d2),_0x4cac54[_0x11f85f(0x1e7)][_0x11f85f(0x1c9)]=_0x11f85f(0x1e8),_0x4cac54['innerHTML']=_0x11f85f(0x1d3)+(playing?_0x11f85f(0x1e3):'Start')+'</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',_0x476aae[_0x11f85f(0x1f2)](_0x4cac54),_0x4cac54[_0x11f85f(0x1d9)]('button')[_0x11f85f(0x1ee)](_0x11f85f(0x1bf),function(_0x5b6429){const _0x5a96d1=_0x11f85f;playing=!playing,_0x5b6429['target'][_0x5a96d1(0x1db)]=playing?_0x5a96d1(0x1e3):_0x5a96d1(0x1ba),!playing?(clearTimeout(timeout),NeoLib[_0x5a96d1(0x1d8)](_0x5a96d1(0x1e1),{'variant':_0x5a96d1(0x1f0)})):(loop(),NeoLib['showToast'](_0x5a96d1(0x1cd),{'variant':_0x5a96d1(0x1f0)})),GM_setValue('playing_gormball',playing);}),playing&&loop();}catch(_0x17d636){console[_0x11f85f(0x1eb)](_0x17d636),NeoLib[_0x11f85f(0x1d8)](_0x11f85f(0x1f3),{'variant':_0x11f85f(0x1f4),'duration':0x1f40});}}());

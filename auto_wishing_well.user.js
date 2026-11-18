@@ -2,7 +2,7 @@
 // @name         Neopets - Karla's Auto Wishing Well
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
+// @version      0.0.2
 // @description  Automatically makes wishes at wishing well
 // @author       Karla
 // @match        *://*.neopets.com/wishing.phtml*
@@ -13,86 +13,4 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_wishing_well.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_wishing_well.user.js
 // ==/UserScript==
-
-let item = GM_getValue('item') || '';
-let np = GM_getValue('np') || '21';
-let auto = GM_getValue('auto_ww') || false;
-
-const sleep = (time) =>
-new Promise((resolve) => setTimeout(resolve, time));
-
-const random_in_range = (start, end) => {
-    return Math.floor(Math.random() * (end - start + 1) + start);
-};
-
-async function makeWish() {
-    const match = document.body.innerHTML.match(/Wish Count:\s*(\d+)/);
-    if (match) {
-        const wishCount = parseInt(match[1], 10);
-        console.log(`Making wish ${wishCount + 1}`);
-    } else if (document.body.innerHTML.includes('Thanks for your donation')) {
-        console.log('Wish done');
-        return;
-    } else {
-        console.log(`Making wish 1`);
-    }
-    await sleep(random_in_range(500, 900));
-    document.querySelector('[name="donation"]').value = np;
-    await sleep(random_in_range(500, 900));
-    document.querySelector('[name="wish"]').value = item;
-    await sleep(random_in_range(500, 900));
-    document.querySelector('[value="Make a Wish"]').click();
-}
-
-(function() {
-    'use strict';
-
-    // Your code here...
-    try {
-        const div = document.createElement('div');
-        div.style.marginTop = '20px';
-        div.innerHTML = `
-        <div>-- Wishing Well Auto Wisher --</div>
-        <br/>
-      <label>Item: <input id="k-item" ${auto ? 'disabled' : ''} /></label>
-      <label>Np: <input id="k-np" type="number" min="21" ${auto ? 'disabled' : ''} /></label>
-      <button>${auto ? 'Stop' : 'Start'}</button>
-    `;
-        const itemInput = div.querySelector('#k-item');
-        itemInput.value = item;
-        itemInput.addEventListener('change', function(event) {
-            item = event.target.value;
-            GM_setValue('item', item);
-        });
-        const npInput = div.querySelector('#k-np');
-        npInput.value = np;
-        npInput.addEventListener('change', function(event) {
-            np = event.target.value;
-            GM_setValue('np', np);
-        });
-        const startButton = div.querySelector('button');
-        startButton.addEventListener('click', function() {
-            auto = !auto;
-            GM_setValue('auto_ww', auto);
-            if (auto) {
-                startButton.innerHTML = 'Stop';
-                itemInput.disabled = true;
-                npInput.disabled = true;
-                makeWish();
-            } else {
-                startButton.innerHTML = 'Start';
-                itemInput.removeAttribute('disabled');
-                npInput.removeAttribute('disabled');
-            }
-        });
-
-        const anchor = document.querySelector('[src="//images.neopets.com/images/wishingwell.gif"]').parentNode;
-        anchor.append(div);
-
-        if (auto) {
-            makeWish();
-        }
-    } catch (e) {
-        console.log(e);
-    }
-})();
+const a0_0x2d975c=a0_0x55b6;(function(_0x5de5f8,_0x2dc351){const _0x2449c9=a0_0x55b6,_0x2a8c40=_0x5de5f8();while(!![]){try{const _0xd4660d=parseInt(_0x2449c9(0x186))/(-0x1*0x45d+0x16c*-0x14+0x20ce)+-parseInt(_0x2449c9(0x185))/(-0x23f0+0x13ff*0x1+-0x3*-0x551)+parseInt(_0x2449c9(0x179))/(0x1de1+0xb*0x11b+-0x2a07)+parseInt(_0x2449c9(0x177))/(0x3*-0x6fc+0x156b+-0x73)+parseInt(_0x2449c9(0x17d))/(-0x1d3*0x7+-0x1b94+0x1*0x285e)+-parseInt(_0x2449c9(0x16b))/(-0x1c*-0x91+0x21c2*-0x1+-0x94*-0x1f)+-parseInt(_0x2449c9(0x168))/(0x135e+0x1*0x1ce7+0x4d3*-0xa);if(_0xd4660d===_0x2dc351)break;else _0x2a8c40['push'](_0x2a8c40['shift']());}catch(_0x1b8836){_0x2a8c40['push'](_0x2a8c40['shift']());}}}(a0_0xd3a3,-0xcd5d4+-0x58d58+0x1b1522));const NeoLib=(function(){'use strict';const _0x27730d=a0_0x55b6;const _0x9fb2eb=_0x27730d(0x196),_0x160b79=_0x27730d(0x15d),_0x5e9a45=()=>{const _0x4bca26=_0x27730d;if(document['getElementById'](_0x9fb2eb))return;const _0x1857c2=document[_0x4bca26(0x16f)]('style');_0x1857c2['id']=_0x9fb2eb,_0x1857c2[_0x4bca26(0x169)]=_0x160b79,(document[_0x4bca26(0x18a)]||document[_0x4bca26(0x17f)])[_0x4bca26(0x189)](_0x1857c2);},_0x225ddf=[_0x27730d(0x16a),'secondary',_0x27730d(0x161)],_0x117ca6=-0xafd+0xb5d+-0x2*-0x7a0,_0xd031ce=-0xa1*-0x29+-0xb67+-0x1ad*0x8,_0x4d3dac=()=>{const _0x2fdccc=_0x27730d;_0x5e9a45();let _0x417d63=document[_0x2fdccc(0x190)](_0x2fdccc(0x195));return!_0x417d63&&(_0x417d63=document['createElement'](_0x2fdccc(0x166)),_0x417d63[_0x2fdccc(0x17a)]=_0x2fdccc(0x19a),document['body'][_0x2fdccc(0x189)](_0x417d63)),_0x417d63;},_0x53e67f=(_0x3f8693,{variant:variant=_0x27730d(0x16a),duration:duration=_0x117ca6}={})=>{const _0x4d277d=_0x27730d,_0x150cea=_0x4d3dac(),_0x1fe54a=document[_0x4d277d(0x16f)](_0x4d277d(0x166)),_0x5f55dd=_0x225ddf[_0x4d277d(0x171)](variant)?variant:_0x4d277d(0x16a);_0x1fe54a[_0x4d277d(0x17a)]=_0x5f55dd===_0x4d277d(0x16a)?_0x4d277d(0x194):'nl-toast\x20nl-toast--'+_0x5f55dd,_0x1fe54a['textContent']=_0x3f8693,_0x150cea[_0x4d277d(0x189)](_0x1fe54a),void _0x1fe54a[_0x4d277d(0x17e)],_0x1fe54a[_0x4d277d(0x19b)]['add']('nl-toast-show');const _0x30df2e=()=>{const _0x346158=_0x4d277d;if(!_0x1fe54a[_0x346158(0x197)])return;_0x1fe54a[_0x346158(0x19b)]['remove'](_0x346158(0x15a)),setTimeout(()=>_0x1fe54a[_0x346158(0x175)](),_0xd031ce);};_0x1fe54a[_0x4d277d(0x17c)](_0x4d277d(0x162),_0x30df2e);if(duration>-0xe04+0x22a+0xbda)setTimeout(_0x30df2e,duration);return{'element':_0x1fe54a,'dismiss':_0x30df2e};};return{'showToast':_0x53e67f};}());let item=GM_getValue(a0_0x2d975c(0x192))||'',np=GM_getValue('np')||'21',auto=GM_getValue(a0_0x2d975c(0x199))||![];function a0_0xd3a3(){const _0x4d7aa2=['\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div>--\x20Wishing\x20Well\x20Auto\x20Wisher\x20--</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<br/>\x0a\x20\x20\x20\x20\x20\x20<label>Item:\x20<input\x20id=\x22k-item\x22\x20','[src=\x22//images.neopets.com/images/wishingwell.gif\x22]','querySelector','\x20/></label>\x0a\x20\x20\x20\x20\x20\x20<label>Np:\x20<input\x20id=\x22k-np\x22\x20type=\x22number\x22\x20min=\x2221\x22\x20','item','target','nl-toast','.nl-toast-container','neolib-ui-styles','parentNode','style','auto_ww','nl-toast-container','classList','Stop','nl-toast-show','Making\x20wish\x20','Start','\x0a.nl-btn\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20--nl-accent-dark:\x20#c96e00;\x0a\x20\x20--nl-tint:\x20rgba(242,\x20133,\x200,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(242,\x20133,\x200,\x200.16);\x0a\x20\x20appearance:\x20none;\x0a\x20\x20-webkit-appearance:\x20none;\x0a\x20\x20display:\x20inline-flex;\x0a\x20\x20align-items:\x20center;\x0a\x20\x20justify-content:\x20center;\x0a\x20\x20gap:\x206px;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x206px\x2016px;\x0a\x20\x20margin:\x200;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.2;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20background:\x20#fff;\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20user-select:\x20none;\x0a\x20\x20text-decoration:\x20none;\x0a\x20\x20vertical-align:\x20middle;\x0a\x20\x20transition:\x20background-color\x200.15s\x20ease,\x20border-color\x200.15s\x20ease,\x20color\x200.15s\x20ease;\x0a}\x0a.nl-btn:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20var(--nl-accent-dark);\x0a}\x0a.nl-btn:active:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint-strong);\x0a}\x0a.nl-btn:focus-visible\x20{\x0a\x20\x20outline:\x202px\x20solid\x20var(--nl-accent);\x0a\x20\x20outline-offset:\x202px;\x0a}\x0a.nl-btn:disabled\x20{\x0a\x20\x20opacity:\x200.5;\x0a\x20\x20cursor:\x20not-allowed;\x0a}\x0a.nl-btn--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a\x20\x20--nl-accent-dark:\x20#5c645a;\x0a\x20\x20--nl-tint:\x20rgba(90,\x20100,\x2088,\x200.07);\x0a\x20\x20--nl-tint-strong:\x20rgba(90,\x20100,\x2088,\x200.14);\x0a}\x0a.nl-btn--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a\x20\x20--nl-accent-dark:\x20#b33a30;\x0a\x20\x20--nl-tint:\x20rgba(217,\x2079,\x2067,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(217,\x2079,\x2067,\x200.16);\x0a}\x0a.nl-btn--ghost\x20{\x0a\x20\x20border-color:\x20transparent;\x0a\x20\x20background:\x20transparent;\x0a}\x0a.nl-btn--ghost:hover:not(:disabled)\x20{\x0a\x20\x20border-color:\x20transparent;\x0a}\x0a.nl-btn--sm\x20{\x0a\x20\x20padding:\x203px\x2010px;\x0a\x20\x20font-size:\x2012px;\x0a\x20\x20border-radius:\x206px;\x0a}\x0a.nl-btn--block\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn.nl-active\x20{\x0a\x20\x20background:\x20var(--nl-accent);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn.nl-active:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-accent-dark);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn-group\x20{\x0a\x20\x20display:\x20inline-flex;\x0a}\x0a.nl-btn-group\x20.nl-btn\x20{\x0a\x20\x20border-radius:\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:first-child\x20{\x0a\x20\x20border-radius:\x208px\x200\x200\x208px;\x0a}\x0a.nl-btn-group\x20.nl-btn:last-child\x20{\x0a\x20\x20border-radius:\x200\x208px\x208px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:first-child\x20{\x0a\x20\x20border-radius:\x206px\x200\x200\x206px;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:last-child\x20{\x0a\x20\x20border-radius:\x200\x206px\x206px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:not(:first-child)\x20{\x0a\x20\x20margin-left:\x20-1.5px;\x0a}\x0a.nl-btn-group--fill\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn-group--fill\x20.nl-btn\x20{\x0a\x20\x20flex:\x201\x201\x200;\x0a\x20\x20min-width:\x200;\x0a\x20\x20padding-left:\x200;\x0a\x20\x20padding-right:\x200;\x0a}\x0a.nl-toast-container\x20{\x0a\x20\x20position:\x20fixed;\x0a\x20\x20bottom:\x2016px;\x0a\x20\x20right:\x2016px;\x0a\x20\x20z-index:\x20999999;\x0a\x20\x20display:\x20flex;\x0a\x20\x20flex-direction:\x20column;\x0a\x20\x20align-items:\x20flex-end;\x0a\x20\x20gap:\x208px;\x0a\x20\x20pointer-events:\x20none;\x0a}\x0a.nl-toast\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20pointer-events:\x20auto;\x0a\x20\x20max-width:\x20320px;\x0a\x20\x20background:\x20#fff;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-left-width:\x204px;\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x2010px\x2014px;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.35;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20box-shadow:\x200\x204px\x2014px\x20rgba(0,\x200,\x200,\x200.12);\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20opacity:\x200;\x0a\x20\x20transform:\x20translateY(8px);\x0a\x20\x20transition:\x20opacity\x200.2s\x20ease,\x20transform\x200.2s\x20ease;\x0a}\x0a.nl-toast.nl-toast-show\x20{\x0a\x20\x20opacity:\x201;\x0a\x20\x20transform:\x20translateY(0);\x0a}\x0a.nl-toast--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a}\x0a.nl-toast--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a}\x0a','Making\x20wish\x201','random','Wishing\x20Well:\x20wish\x20form\x20not\x20found\x20-\x20cannot\x20make\x20a\x20wish','danger','click','removeAttribute','</button>\x0a\x20\x20\x20\x20','Wishing\x20Well:\x20wishes\x20done','div','match','2169762Luqqjy','textContent','primary','6601470wcVyCR','[name=\x22donation\x22]','value','change','createElement','Thanks\x20for\x20your\x20donation','includes','body','showToast','log','remove','innerHTML','1472436KzruMC','#k-item','3287208wHcuYG','className','floor','addEventListener','1560285PpYyWa','offsetWidth','documentElement','\x20/></label>\x0a\x20\x20\x20\x20\x20\x20<button>','disabled','Wishing\x20Well:\x20auto\x20wish\x20started','secondary','#k-np','1835700CMnXRc','1122005DvzyWp','[name=\x22wish\x22]','[value=\x22Make\x20a\x20Wish\x22]','appendChild','head','append','Wish\x20done','Wishing\x20Well:\x20auto\x20wish\x20stopped'];a0_0xd3a3=function(){return _0x4d7aa2;};return a0_0xd3a3();}const sleep=_0x536b23=>new Promise(_0x5e4fea=>setTimeout(_0x5e4fea,_0x536b23)),random_in_range=(_0x1432aa,_0x4f6d91)=>{const _0x5384a0=a0_0x2d975c;return Math[_0x5384a0(0x17b)](Math[_0x5384a0(0x15f)]()*(_0x4f6d91-_0x1432aa+(-0x1918+-0xa*-0x2b6+-0x203))+_0x1432aa);};async function makeWish(){const _0x283c55=a0_0x2d975c,_0xbc29ed=document[_0x283c55(0x172)][_0x283c55(0x176)][_0x283c55(0x167)](/Wish Count:\s*(\d+)/);if(_0xbc29ed){const _0x3f97d8=parseInt(_0xbc29ed[-0x1*0x1a17+-0x124*0x10+0x3b2*0xc],0x16*0xc1+0x118a+0x2*-0x110b);console[_0x283c55(0x174)](_0x283c55(0x15b)+(_0x3f97d8+(0x778*-0x5+0x9be+0x25*0xbf)));}else{if(document[_0x283c55(0x172)][_0x283c55(0x176)]['includes'](_0x283c55(0x170))){console['log'](_0x283c55(0x18c)),NeoLib[_0x283c55(0x173)](_0x283c55(0x165));return;}else console[_0x283c55(0x174)](_0x283c55(0x15e));}if(!document[_0x283c55(0x190)](_0x283c55(0x16c))||!document[_0x283c55(0x190)](_0x283c55(0x188))){console[_0x283c55(0x174)]('Wishing\x20well\x20form\x20not\x20found'),NeoLib['showToast'](_0x283c55(0x160),{'variant':_0x283c55(0x161),'duration':0x0});return;}await sleep(random_in_range(0x1f6b*-0x1+0xe6a+0x12f5,-0xe0f+0xab2+-0x1*-0x6e1)),document[_0x283c55(0x190)]('[name=\x22donation\x22]')[_0x283c55(0x16d)]=np,await sleep(random_in_range(0x12af+0x857+-0xc89*0x2,-0x18d7+0x5e+0x1bfd)),document[_0x283c55(0x190)](_0x283c55(0x187))[_0x283c55(0x16d)]=item,await sleep(random_in_range(0xb23*-0x1+-0x1*0xab3+0x17ca,0x1650+0x3f+-0x130b)),document[_0x283c55(0x190)](_0x283c55(0x188))['click']();}function a0_0x55b6(_0xb551c0,_0xdcfb9c){_0xb551c0=_0xb551c0-(0x1ee7+-0x46+-0x1d48);const _0x49d080=a0_0xd3a3();let _0x1e3180=_0x49d080[_0xb551c0];return _0x1e3180;}(function(){'use strict';const _0x168a44=a0_0x2d975c;try{const _0x29ac44=document['createElement'](_0x168a44(0x166));_0x29ac44[_0x168a44(0x198)]['marginTop']='20px',_0x29ac44[_0x168a44(0x176)]=_0x168a44(0x18e)+(auto?'disabled':'')+_0x168a44(0x191)+(auto?_0x168a44(0x181):'')+_0x168a44(0x180)+(auto?_0x168a44(0x159):_0x168a44(0x15c))+_0x168a44(0x164);const _0xea00d6=_0x29ac44[_0x168a44(0x190)](_0x168a44(0x178));_0xea00d6[_0x168a44(0x16d)]=item,_0xea00d6[_0x168a44(0x17c)](_0x168a44(0x16e),function(_0x21293d){const _0x5aa805=_0x168a44;item=_0x21293d['target']['value'],GM_setValue(_0x5aa805(0x192),item);});const _0x4f18cf=_0x29ac44[_0x168a44(0x190)](_0x168a44(0x184));_0x4f18cf['value']=np,_0x4f18cf[_0x168a44(0x17c)](_0x168a44(0x16e),function(_0x1ac617){const _0x3b0da4=_0x168a44;np=_0x1ac617[_0x3b0da4(0x193)]['value'],GM_setValue('np',np);});const _0x173960=_0x29ac44['querySelector']('button');_0x173960[_0x168a44(0x17c)](_0x168a44(0x162),function(){const _0x5afc68=_0x168a44;auto=!auto,GM_setValue(_0x5afc68(0x199),auto),auto?(_0x173960['innerHTML']=_0x5afc68(0x159),_0xea00d6['disabled']=!![],_0x4f18cf[_0x5afc68(0x181)]=!![],NeoLib[_0x5afc68(0x173)](_0x5afc68(0x182),{'variant':'secondary'}),makeWish()):(_0x173960[_0x5afc68(0x176)]=_0x5afc68(0x15c),_0xea00d6[_0x5afc68(0x163)](_0x5afc68(0x181)),_0x4f18cf[_0x5afc68(0x163)](_0x5afc68(0x181)),NeoLib['showToast'](_0x5afc68(0x18d),{'variant':_0x5afc68(0x183)}));});const _0x4c2716=document[_0x168a44(0x190)](_0x168a44(0x18f))['parentNode'];_0x4c2716[_0x168a44(0x18b)](_0x29ac44),auto&&makeWish();}catch(_0x142bc1){console['log'](_0x142bc1),NeoLib[_0x168a44(0x173)]('Wishing\x20Well:\x20could\x20not\x20set\x20up\x20the\x20auto\x20wisher\x20on\x20this\x20page',{'variant':_0x168a44(0x161),'duration':0x1f40});}}());

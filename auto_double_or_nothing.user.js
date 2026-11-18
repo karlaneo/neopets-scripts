@@ -2,8 +2,8 @@
 // @name         Neopets - Karla's Double or Nothing Autoplayer
 // @namespace    karla@neopointskarla
 // @license      GPL3
-// @version      0.0.1
-// @description  Automatically plays kiss the mortog
+// @version      0.0.2
+// @description  Automatically plays double or nothing
 // @author       Karla
 // @match        *://*.neopets.com/medieval/doubleornothing.phtml*
 // @icon         https://github.com/karlaneo/neopets-scripts/blob/main/favicon-32x32.png?raw=true
@@ -12,89 +12,4 @@
 // @downloadURL  https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_double_or_nothing.user.js
 // @updateURL    https://github.com/karlaneo/neopets-scripts/raw/refs/heads/main/auto_double_or_nothing.user.js
 // ==/UserScript==
-
-let playing = GM_getValue('playing_don') || false;
-let target = GM_getValue('target_don') || '10';
-console.log(target);
-let timeout;
-
-const random_in_range = (start, end) => {
-    return Math.floor(Math.random() * (end - start + 1) + start);
-};
-
-function loop() {
-    timeout = setTimeout(function() {
-        if (document.querySelector('[href^="process_doubleornothing.phtml"]')) {
-            const anchors = document.querySelectorAll('[href^="process_doubleornothing.phtml"]');
-            anchors[random_in_range(0, anchors.length - 1)].click();
-        } else if (document.querySelector('[value^="Collect Your Winnings"]')) {
-            const currentScore = document.querySelector('[value^="Collect Your Winnings"]').value.replace(/[^0-9]+/g, '');
-            if (Number(currentScore) >= Number(target)) {
-                document.querySelector('[value^="Collect Your Winnings"]').click();
-            } else {
-                document.querySelector('[value="Continue"]').click();
-            }
-        } else if (document.querySelector('[value="Try again..."]')) {
-            document.querySelector('[value="Try again..."]').click();
-        }
-
-    }, random_in_range(1200, 1800));
-}
-
-(function() {
-    'use strict';
-
-    // Your code here...
-    try {
-        const anchor = document.querySelector('center')
-        || Array.from(document.querySelectorAll('b')).find((n) => n.textContent === 'Uh oh...');
-
-        const section = document.createElement('div');
-        section.style.textAlign = 'center';
-        section.style.margin = '10px';
-        section.innerHTML = `
-        <div style="margin-bottom: 10px">-- Double or Nothing Autoplayer --</div>
-        <label>Stop at score <select>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="80">80</option>
-          <option value="160">160</option>
-          <option value="320">320</option>
-          <option value="640">640</option>
-          <option value="1280">1280</option>
-          <option value="2560">2560</option>
-          <option value="5120">5120</option>
-          <option value="10240">10240 (staff review)</option>
-          <option value="20480">20480 (staff review)</option>
-          <option value="40960">40960 (staff review)</option>
-          <option value="81920">81920 (staff review)</option>
-          <option value="163840">163840 (staff review)</option>
-        </select>
-        </label>
-        <button>${playing ? 'Stop' : 'Start'}</button>
-        `;
-        anchor.after(section);
-        section.querySelector('button').addEventListener('click', function(event) {
-            playing = !playing;
-            section.querySelector('select').disabled = playing;
-            event.target.innerHTML = playing ? 'Stop' : 'Start';
-            if (!playing) {
-                clearTimeout(timeout);
-            } else {
-                loop();
-            }
-            GM_setValue('playing_don', playing);
-        });
-        section.querySelector('select').value = target;
-        section.querySelector('select').addEventListener('change', function(event) {
-            target = event.target.value;
-            GM_setValue('target_don', target);
-        });
-        section.querySelector('select').disabled = playing;
-        if (playing) {
-            loop();
-        }
-    } catch (e) {
-        console.log(e);
-    }
-})();
+const a0_0x674b3e=a0_0x4f8f;(function(_0x5700e9,_0x2dc890){const _0x2d9ac1=a0_0x4f8f,_0x21ae9f=_0x5700e9();while(!![]){try{const _0x421f44=parseInt(_0x2d9ac1(0x183))/(-0x15d7+0xd*-0x4d+0x1*0x19c1)+parseInt(_0x2d9ac1(0x194))/(0x3a*-0x4a+0x2*-0x581+-0x7f*-0x38)*(parseInt(_0x2d9ac1(0x17d))/(0x102b*0x1+-0x624+0x1*-0xa04))+parseInt(_0x2d9ac1(0x176))/(-0x30a*0x3+0x12fe+-0x2*0x4ee)+parseInt(_0x2d9ac1(0x19e))/(0x1bfd+-0xa65+-0xb*0x199)+parseInt(_0x2d9ac1(0x182))/(-0x8b*0x16+0x74*-0x11+0x13ac)+-parseInt(_0x2d9ac1(0x1b2))/(0xe31+-0x850+0xe*-0x6b)*(parseInt(_0x2d9ac1(0x177))/(-0xc15+-0x1e28+0x1*0x2a45))+-parseInt(_0x2d9ac1(0x1ad))/(-0x2554+-0x1*-0x11c2+0x139b);if(_0x421f44===_0x2dc890)break;else _0x21ae9f['push'](_0x21ae9f['shift']());}catch(_0x3497f2){_0x21ae9f['push'](_0x21ae9f['shift']());}}}(a0_0x70b4,0x107f10+0x40c5*0x1d+0x1*-0xf7aec));const NeoLib=(function(){'use strict';const _0x14e437=a0_0x4f8f;const _0x4361fe=_0x14e437(0x185),_0x4a3f98=_0x14e437(0x196),_0x278582=()=>{const _0x1411b0=_0x14e437;if(document[_0x1411b0(0x1a8)](_0x4361fe))return;const _0x21b61d=document[_0x1411b0(0x19a)](_0x1411b0(0x18b));_0x21b61d['id']=_0x4361fe,_0x21b61d[_0x1411b0(0x189)]=_0x4a3f98,(document['head']||document[_0x1411b0(0x1a3)])[_0x1411b0(0x190)](_0x21b61d);},_0x403ee0=[_0x14e437(0x1a7),'secondary',_0x14e437(0x17a)],_0x4c8ce6=0x1*0x17b+-0x178d+0x25b2,_0x577f7d=-0x166b+0x1a84*-0x1+0x31e9*0x1,_0x39c5d4=()=>{const _0x3e9a60=_0x14e437;_0x278582();let _0x39c64b=document['querySelector'](_0x3e9a60(0x18e));return!_0x39c64b&&(_0x39c64b=document['createElement'](_0x3e9a60(0x1ac)),_0x39c64b[_0x3e9a60(0x18f)]='nl-toast-container',document[_0x3e9a60(0x1a9)][_0x3e9a60(0x190)](_0x39c64b)),_0x39c64b;},_0x1dac1f=(_0xbbb13c,{variant:variant=_0x14e437(0x1a7),duration:duration=_0x4c8ce6}={})=>{const _0x4880d3=_0x14e437,_0x1fa296=_0x39c5d4(),_0x88c50f=document[_0x4880d3(0x19a)]('div'),_0x59f828=_0x403ee0[_0x4880d3(0x192)](variant)?variant:_0x4880d3(0x1a7);_0x88c50f[_0x4880d3(0x18f)]=_0x59f828===_0x4880d3(0x1a7)?_0x4880d3(0x199):_0x4880d3(0x193)+_0x59f828,_0x88c50f[_0x4880d3(0x189)]=_0xbbb13c,_0x1fa296[_0x4880d3(0x190)](_0x88c50f),void _0x88c50f[_0x4880d3(0x19f)],_0x88c50f['classList'][_0x4880d3(0x1ab)](_0x4880d3(0x19c));const _0x47c12a=()=>{const _0x637f5f=_0x4880d3;if(!_0x88c50f[_0x637f5f(0x1b7)])return;_0x88c50f[_0x637f5f(0x1a5)]['remove'](_0x637f5f(0x19c)),setTimeout(()=>_0x88c50f['remove'](),_0x577f7d);};_0x88c50f[_0x4880d3(0x180)]('click',_0x47c12a);if(duration>0x63b+-0x1*0x161+-0x4da)setTimeout(_0x47c12a,duration);return{'element':_0x88c50f,'dismiss':_0x47c12a};};return{'showToast':_0x1dac1f};}());let playing=GM_getValue(a0_0x674b3e(0x1b1))||![],target=GM_getValue(a0_0x674b3e(0x198))||'10';console[a0_0x674b3e(0x186)](target);function a0_0x4f8f(_0x565664,_0x5a118f){_0x565664=_0x565664-(0x5f6+0x1c*0xdd+-0x1cac);const _0x5e603e=a0_0x70b4();let _0x453a22=_0x5e603e[_0x565664];return _0x453a22;}function a0_0x70b4(){const _0x41fa4d=['1182106LvQTDR','secondary','\x0a.nl-btn\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20--nl-accent-dark:\x20#c96e00;\x0a\x20\x20--nl-tint:\x20rgba(242,\x20133,\x200,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(242,\x20133,\x200,\x200.16);\x0a\x20\x20appearance:\x20none;\x0a\x20\x20-webkit-appearance:\x20none;\x0a\x20\x20display:\x20inline-flex;\x0a\x20\x20align-items:\x20center;\x0a\x20\x20justify-content:\x20center;\x0a\x20\x20gap:\x206px;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x206px\x2016px;\x0a\x20\x20margin:\x200;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.2;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20background:\x20#fff;\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20user-select:\x20none;\x0a\x20\x20text-decoration:\x20none;\x0a\x20\x20vertical-align:\x20middle;\x0a\x20\x20transition:\x20background-color\x200.15s\x20ease,\x20border-color\x200.15s\x20ease,\x20color\x200.15s\x20ease;\x0a}\x0a.nl-btn:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20var(--nl-accent-dark);\x0a}\x0a.nl-btn:active:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-tint-strong);\x0a}\x0a.nl-btn:focus-visible\x20{\x0a\x20\x20outline:\x202px\x20solid\x20var(--nl-accent);\x0a\x20\x20outline-offset:\x202px;\x0a}\x0a.nl-btn:disabled\x20{\x0a\x20\x20opacity:\x200.5;\x0a\x20\x20cursor:\x20not-allowed;\x0a}\x0a.nl-btn--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a\x20\x20--nl-accent-dark:\x20#5c645a;\x0a\x20\x20--nl-tint:\x20rgba(90,\x20100,\x2088,\x200.07);\x0a\x20\x20--nl-tint-strong:\x20rgba(90,\x20100,\x2088,\x200.14);\x0a}\x0a.nl-btn--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a\x20\x20--nl-accent-dark:\x20#b33a30;\x0a\x20\x20--nl-tint:\x20rgba(217,\x2079,\x2067,\x200.08);\x0a\x20\x20--nl-tint-strong:\x20rgba(217,\x2079,\x2067,\x200.16);\x0a}\x0a.nl-btn--ghost\x20{\x0a\x20\x20border-color:\x20transparent;\x0a\x20\x20background:\x20transparent;\x0a}\x0a.nl-btn--ghost:hover:not(:disabled)\x20{\x0a\x20\x20border-color:\x20transparent;\x0a}\x0a.nl-btn--sm\x20{\x0a\x20\x20padding:\x203px\x2010px;\x0a\x20\x20font-size:\x2012px;\x0a\x20\x20border-radius:\x206px;\x0a}\x0a.nl-btn--block\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn.nl-active\x20{\x0a\x20\x20background:\x20var(--nl-accent);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn.nl-active:hover:not(:disabled)\x20{\x0a\x20\x20background:\x20var(--nl-accent-dark);\x0a\x20\x20border-color:\x20var(--nl-accent-dark);\x0a\x20\x20color:\x20#fff;\x0a}\x0a.nl-btn-group\x20{\x0a\x20\x20display:\x20inline-flex;\x0a}\x0a.nl-btn-group\x20.nl-btn\x20{\x0a\x20\x20border-radius:\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:first-child\x20{\x0a\x20\x20border-radius:\x208px\x200\x200\x208px;\x0a}\x0a.nl-btn-group\x20.nl-btn:last-child\x20{\x0a\x20\x20border-radius:\x200\x208px\x208px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:first-child\x20{\x0a\x20\x20border-radius:\x206px\x200\x200\x206px;\x0a}\x0a.nl-btn-group\x20.nl-btn--sm:last-child\x20{\x0a\x20\x20border-radius:\x200\x206px\x206px\x200;\x0a}\x0a.nl-btn-group\x20.nl-btn:not(:first-child)\x20{\x0a\x20\x20margin-left:\x20-1.5px;\x0a}\x0a.nl-btn-group--fill\x20{\x0a\x20\x20display:\x20flex;\x0a\x20\x20width:\x20100%;\x0a}\x0a.nl-btn-group--fill\x20.nl-btn\x20{\x0a\x20\x20flex:\x201\x201\x200;\x0a\x20\x20min-width:\x200;\x0a\x20\x20padding-left:\x200;\x0a\x20\x20padding-right:\x200;\x0a}\x0a.nl-toast-container\x20{\x0a\x20\x20position:\x20fixed;\x0a\x20\x20bottom:\x2016px;\x0a\x20\x20right:\x2016px;\x0a\x20\x20z-index:\x20999999;\x0a\x20\x20display:\x20flex;\x0a\x20\x20flex-direction:\x20column;\x0a\x20\x20align-items:\x20flex-end;\x0a\x20\x20gap:\x208px;\x0a\x20\x20pointer-events:\x20none;\x0a}\x0a.nl-toast\x20{\x0a\x20\x20--nl-accent:\x20#f28500;\x0a\x20\x20pointer-events:\x20auto;\x0a\x20\x20max-width:\x20320px;\x0a\x20\x20background:\x20#fff;\x0a\x20\x20border:\x201.5px\x20solid\x20var(--nl-accent);\x0a\x20\x20border-left-width:\x204px;\x0a\x20\x20border-radius:\x208px;\x0a\x20\x20padding:\x2010px\x2014px;\x0a\x20\x20font-family:\x20\x22MuseoSansRounded700\x22,\x20\x22Cerebri\x20Sans\x22,\x20\x22Trebuchet\x20MS\x22,\x20\x22Arial\x22,\x20sans-serif;\x0a\x20\x20font-size:\x2013px;\x0a\x20\x20font-weight:\x20700;\x0a\x20\x20line-height:\x201.35;\x0a\x20\x20color:\x20var(--nl-accent);\x0a\x20\x20box-shadow:\x200\x204px\x2014px\x20rgba(0,\x200,\x200,\x200.12);\x0a\x20\x20cursor:\x20pointer;\x0a\x20\x20opacity:\x200;\x0a\x20\x20transform:\x20translateY(8px);\x0a\x20\x20transition:\x20opacity\x200.2s\x20ease,\x20transform\x200.2s\x20ease;\x0a}\x0a.nl-toast.nl-toast-show\x20{\x0a\x20\x20opacity:\x201;\x0a\x20\x20transform:\x20translateY(0);\x0a}\x0a.nl-toast--secondary\x20{\x0a\x20\x20--nl-accent:\x20#7a8478;\x0a}\x0a.nl-toast--danger\x20{\x0a\x20\x20--nl-accent:\x20#d94f43;\x0a}\x0a','Uh\x20oh...','target_don','nl-toast','createElement','[value=\x22Continue\x22]','nl-toast-show','target','1887875KKWrfF','offsetWidth','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22margin-bottom:\x2010px\x22>--\x20Double\x20or\x20Nothing\x20Autoplayer\x20--</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<label>Stop\x20at\x20score\x20<select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2210\x22>10</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2220\x22>20</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2280\x22>80</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22160\x22>160</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22320\x22>320</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22640\x22>640</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x221280\x22>1280</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x222560\x22>2560</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x225120\x22>5120</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2210240\x22>10240\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2220480\x22>20480\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2240960\x22>40960\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x2281920\x22>81920\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<option\x20value=\x22163840\x22>163840\x20(staff\x20review)</option>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</select>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</label>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button>','10px','center','documentElement','Double\x20or\x20Nothing:\x20autoplay\x20started','classList','querySelector','primary','getElementById','body','find','add','div','3455748HsjDLT','button','Stop','</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','playing_don','1246acTmZP','margin','floor','[value^=\x22Collect\x20Your\x20Winnings\x22]','Start','parentNode','784588BmaeMy','41776xonNpP','[value=\x22Try\x20again...\x22]','Double\x20or\x20Nothing:\x20could\x20not\x20set\x20up\x20the\x20autoplayer\x20on\x20this\x20page','danger','innerHTML','Double\x20or\x20Nothing:\x20autoplay\x20stopped','3bcHkaT','textAlign','select','addEventListener','value','2424768dbdojo','292030YrDEbs','querySelectorAll','neolib-ui-styles','log','disabled','click','textContent','[href^=\x22process_doubleornothing.phtml\x22]','style','change','random','.nl-toast-container','className','appendChild','showToast','includes','nl-toast\x20nl-toast--'];a0_0x70b4=function(){return _0x41fa4d;};return a0_0x70b4();}let timeout;const random_in_range=(_0x4c53c2,_0x56de75)=>{const _0x4ec4b8=a0_0x674b3e;return Math[_0x4ec4b8(0x1b4)](Math[_0x4ec4b8(0x18d)]()*(_0x56de75-_0x4c53c2+(-0x10c1+0x1*-0x10cf+0x2191))+_0x4c53c2);};function loop(){timeout=setTimeout(function(){const _0x404dd4=a0_0x4f8f;if(document[_0x404dd4(0x1a6)](_0x404dd4(0x18a))){const _0x4e4bac=document[_0x404dd4(0x184)](_0x404dd4(0x18a));_0x4e4bac[random_in_range(0x4c*0x20+-0x5bf*-0x1+-0xf3f,_0x4e4bac['length']-(0x1418+0xd79+-0x2190))][_0x404dd4(0x188)]();}else{if(document[_0x404dd4(0x1a6)](_0x404dd4(0x1b5))){const _0x153856=document['querySelector'](_0x404dd4(0x1b5))[_0x404dd4(0x181)]['replace'](/[^0-9]+/g,'');Number(_0x153856)>=Number(target)?document['querySelector'](_0x404dd4(0x1b5))[_0x404dd4(0x188)]():document[_0x404dd4(0x1a6)](_0x404dd4(0x19b))[_0x404dd4(0x188)]();}else document[_0x404dd4(0x1a6)](_0x404dd4(0x178))&&document[_0x404dd4(0x1a6)](_0x404dd4(0x178))[_0x404dd4(0x188)]();}},random_in_range(0x265*0x9+-0x22*-0x2b+0x1693*-0x1,-0x12a*0x7+-0x1a07+0x2935));}(function(){'use strict';const _0x38d2ac=a0_0x674b3e;try{const _0x29039b=document[_0x38d2ac(0x1a6)](_0x38d2ac(0x1a2))||Array['from'](document[_0x38d2ac(0x184)]('b'))[_0x38d2ac(0x1aa)](_0x5d79e7=>_0x5d79e7[_0x38d2ac(0x189)]===_0x38d2ac(0x197)),_0x34992c=document[_0x38d2ac(0x19a)](_0x38d2ac(0x1ac));_0x34992c[_0x38d2ac(0x18b)][_0x38d2ac(0x17e)]=_0x38d2ac(0x1a2),_0x34992c['style'][_0x38d2ac(0x1b3)]=_0x38d2ac(0x1a1),_0x34992c[_0x38d2ac(0x17b)]=_0x38d2ac(0x1a0)+(playing?_0x38d2ac(0x1af):_0x38d2ac(0x1b6))+_0x38d2ac(0x1b0),_0x29039b['after'](_0x34992c),_0x34992c[_0x38d2ac(0x1a6)](_0x38d2ac(0x1ae))[_0x38d2ac(0x180)](_0x38d2ac(0x188),function(_0x5090cd){const _0x5f2be4=_0x38d2ac;playing=!playing,_0x34992c[_0x5f2be4(0x1a6)]('select')[_0x5f2be4(0x187)]=playing,_0x5090cd['target'][_0x5f2be4(0x17b)]=playing?_0x5f2be4(0x1af):_0x5f2be4(0x1b6),!playing?(clearTimeout(timeout),NeoLib[_0x5f2be4(0x191)](_0x5f2be4(0x17c),{'variant':_0x5f2be4(0x195)})):(loop(),NeoLib[_0x5f2be4(0x191)](_0x5f2be4(0x1a4),{'variant':_0x5f2be4(0x195)})),GM_setValue('playing_don',playing);}),_0x34992c[_0x38d2ac(0x1a6)]('select')[_0x38d2ac(0x181)]=target,_0x34992c[_0x38d2ac(0x1a6)](_0x38d2ac(0x17f))[_0x38d2ac(0x180)](_0x38d2ac(0x18c),function(_0x3e3f0f){const _0x535318=_0x38d2ac;target=_0x3e3f0f[_0x535318(0x19d)][_0x535318(0x181)],GM_setValue(_0x535318(0x198),target);}),_0x34992c[_0x38d2ac(0x1a6)]('select')[_0x38d2ac(0x187)]=playing,playing&&loop();}catch(_0x2a00fe){console[_0x38d2ac(0x186)](_0x2a00fe),NeoLib[_0x38d2ac(0x191)](_0x38d2ac(0x179),{'variant':_0x38d2ac(0x17a),'duration':0x1f40});}}());
